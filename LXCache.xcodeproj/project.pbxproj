@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73185D202195C352005F1B96 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73185D1F2195C352005F1B96 /* SubViewController.m */; };
 		7349A80E218AF03A0073077B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A80D218AF03A0073077B /* AppDelegate.m */; };
 		7349A811218AF03A0073077B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A810218AF03A0073077B /* ViewController.m */; };
 		7349A814218AF03A0073077B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7349A812218AF03A0073077B /* Main.storyboard */; };
@@ -19,6 +20,8 @@
 /* Begin PBXFileReference section */
 		368A265B28A47CAC856412BE /* Pods-LXCache.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXCache.release.xcconfig"; path = "Pods/Target Support Files/Pods-LXCache/Pods-LXCache.release.xcconfig"; sourceTree = "<group>"; };
 		5A75564ECC7F1315892BBE56 /* libPods-LXCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LXCache.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73185D1E2195C352005F1B96 /* SubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
+		73185D1F2195C352005F1B96 /* SubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
 		7349A809218AF03A0073077B /* LXCache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXCache.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7349A80C218AF03A0073077B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7349A80D218AF03A0073077B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -77,6 +80,8 @@
 				7349A80D218AF03A0073077B /* AppDelegate.m */,
 				7349A80F218AF03A0073077B /* ViewController.h */,
 				7349A810218AF03A0073077B /* ViewController.m */,
+				73185D1E2195C352005F1B96 /* SubViewController.h */,
+				73185D1F2195C352005F1B96 /* SubViewController.m */,
 				7349A812218AF03A0073077B /* Main.storyboard */,
 				7349A815218AF03B0073077B /* Assets.xcassets */,
 				7349A817218AF03B0073077B /* LaunchScreen.storyboard */,
@@ -106,8 +111,6 @@
 				7349A805218AF03A0073077B /* Sources */,
 				7349A806218AF03A0073077B /* Frameworks */,
 				7349A807218AF03A0073077B /* Resources */,
-				B208858EBFED07CEE13B2D16 /* [CP] Embed Pods Frameworks */,
-				1246EB9E1803980199E6D57A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -164,21 +167,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1246EB9E1803980199E6D57A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LXCache/Pods-LXCache-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		226CD8EFF1DE85611582EE80 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -197,21 +185,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B208858EBFED07CEE13B2D16 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LXCache/Pods-LXCache-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -222,6 +195,7 @@
 				7349A811218AF03A0073077B /* ViewController.m in Sources */,
 				7349A81C218AF03B0073077B /* main.m in Sources */,
 				7349A80E218AF03A0073077B /* AppDelegate.m in Sources */,
+				73185D202195C352005F1B96 /* SubViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,8 +337,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5KQQLB9477;
 				INFOPLIST_FILE = LXCache/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xllpp.www.LXCache;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -377,8 +355,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5KQQLB9477;
 				INFOPLIST_FILE = LXCache/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xllpp.www.LXCache;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
