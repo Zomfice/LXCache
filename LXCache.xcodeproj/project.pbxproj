@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		73185D202195C352005F1B96 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73185D1F2195C352005F1B96 /* SubViewController.m */; };
+		733E893A21BEA32100AF035A /* LXCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893921BEA32100AF035A /* LXCache.m */; };
+		733E893D21BEA5F400AF035A /* LXSeparateCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893C21BEA5F400AF035A /* LXSeparateCache.m */; };
+		733E894021BEA82300AF035A /* LXKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893F21BEA82300AF035A /* LXKVStorage.m */; };
+		733E894321BEA82F00AF035A /* LXMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E894221BEA82F00AF035A /* LXMemoryCache.m */; };
+		733E894621BEA83D00AF035A /* LXDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E894521BEA83D00AF035A /* LXDiskCache.m */; };
+		733E894921BEA86300AF035A /* LXSqlit.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E894821BEA86300AF035A /* LXSqlit.m */; };
 		7349A80E218AF03A0073077B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A80D218AF03A0073077B /* AppDelegate.m */; };
 		7349A811218AF03A0073077B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A810218AF03A0073077B /* ViewController.m */; };
 		7349A814218AF03A0073077B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7349A812218AF03A0073077B /* Main.storyboard */; };
@@ -22,6 +28,18 @@
 		5A75564ECC7F1315892BBE56 /* libPods-LXCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LXCache.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73185D1E2195C352005F1B96 /* SubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
 		73185D1F2195C352005F1B96 /* SubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
+		733E893821BEA32100AF035A /* LXCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXCache.h; sourceTree = "<group>"; };
+		733E893921BEA32100AF035A /* LXCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXCache.m; sourceTree = "<group>"; };
+		733E893B21BEA5F400AF035A /* LXSeparateCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSeparateCache.h; sourceTree = "<group>"; };
+		733E893C21BEA5F400AF035A /* LXSeparateCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXSeparateCache.m; sourceTree = "<group>"; };
+		733E893E21BEA82300AF035A /* LXKVStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXKVStorage.h; sourceTree = "<group>"; };
+		733E893F21BEA82300AF035A /* LXKVStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXKVStorage.m; sourceTree = "<group>"; };
+		733E894121BEA82F00AF035A /* LXMemoryCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXMemoryCache.h; sourceTree = "<group>"; };
+		733E894221BEA82F00AF035A /* LXMemoryCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXMemoryCache.m; sourceTree = "<group>"; };
+		733E894421BEA83D00AF035A /* LXDiskCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXDiskCache.h; sourceTree = "<group>"; };
+		733E894521BEA83D00AF035A /* LXDiskCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXDiskCache.m; sourceTree = "<group>"; };
+		733E894721BEA86300AF035A /* LXSqlit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSqlit.h; sourceTree = "<group>"; };
+		733E894821BEA86300AF035A /* LXSqlit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXSqlit.m; sourceTree = "<group>"; };
 		7349A809218AF03A0073077B /* LXCache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXCache.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7349A80C218AF03A0073077B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7349A80D218AF03A0073077B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -55,6 +73,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		733E893721BEA2DC00AF035A /* LXCache */ = {
+			isa = PBXGroup;
+			children = (
+				733E893821BEA32100AF035A /* LXCache.h */,
+				733E893921BEA32100AF035A /* LXCache.m */,
+				733E893B21BEA5F400AF035A /* LXSeparateCache.h */,
+				733E893C21BEA5F400AF035A /* LXSeparateCache.m */,
+				733E893E21BEA82300AF035A /* LXKVStorage.h */,
+				733E893F21BEA82300AF035A /* LXKVStorage.m */,
+				733E894121BEA82F00AF035A /* LXMemoryCache.h */,
+				733E894221BEA82F00AF035A /* LXMemoryCache.m */,
+				733E894721BEA86300AF035A /* LXSqlit.h */,
+				733E894821BEA86300AF035A /* LXSqlit.m */,
+				733E894421BEA83D00AF035A /* LXDiskCache.h */,
+				733E894521BEA83D00AF035A /* LXDiskCache.m */,
+			);
+			path = LXCache;
+			sourceTree = "<group>";
+		};
 		7349A800218AF03A0073077B = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +113,7 @@
 		7349A80B218AF03A0073077B /* LXCache */ = {
 			isa = PBXGroup;
 			children = (
+				733E893721BEA2DC00AF035A /* LXCache */,
 				7349A80C218AF03A0073077B /* AppDelegate.h */,
 				7349A80D218AF03A0073077B /* AppDelegate.m */,
 				7349A80F218AF03A0073077B /* ViewController.h */,
@@ -192,10 +230,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				733E893A21BEA32100AF035A /* LXCache.m in Sources */,
+				733E894921BEA86300AF035A /* LXSqlit.m in Sources */,
 				7349A811218AF03A0073077B /* ViewController.m in Sources */,
 				7349A81C218AF03B0073077B /* main.m in Sources */,
+				733E894321BEA82F00AF035A /* LXMemoryCache.m in Sources */,
 				7349A80E218AF03A0073077B /* AppDelegate.m in Sources */,
+				733E894021BEA82300AF035A /* LXKVStorage.m in Sources */,
+				733E894621BEA83D00AF035A /* LXDiskCache.m in Sources */,
 				73185D202195C352005F1B96 /* SubViewController.m in Sources */,
+				733E893D21BEA5F400AF035A /* LXSeparateCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

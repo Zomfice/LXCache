@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SubViewController.h"
+#import "LXCache.h"
 @interface ViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [LXCache defaultCache].identity(@"");
     // Do any additional setup after loading the view, typically from a nib.
 }
 
