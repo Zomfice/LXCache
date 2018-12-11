@@ -13,7 +13,7 @@
 		733E894021BEA82300AF035A /* LXKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893F21BEA82300AF035A /* LXKVStorage.m */; };
 		733E894321BEA82F00AF035A /* LXMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E894221BEA82F00AF035A /* LXMemoryCache.m */; };
 		733E894621BEA83D00AF035A /* LXDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E894521BEA83D00AF035A /* LXDiskCache.m */; };
-		733E894921BEA86300AF035A /* LXSqlit.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E894821BEA86300AF035A /* LXSqlit.m */; };
+		73402E0921BFA9C30090CBC7 /* LXSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 73402E0821BFA9C30090CBC7 /* LXSqlite.m */; };
 		7349A80E218AF03A0073077B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A80D218AF03A0073077B /* AppDelegate.m */; };
 		7349A811218AF03A0073077B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A810218AF03A0073077B /* ViewController.m */; };
 		7349A814218AF03A0073077B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7349A812218AF03A0073077B /* Main.storyboard */; };
@@ -38,8 +38,8 @@
 		733E894221BEA82F00AF035A /* LXMemoryCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXMemoryCache.m; sourceTree = "<group>"; };
 		733E894421BEA83D00AF035A /* LXDiskCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXDiskCache.h; sourceTree = "<group>"; };
 		733E894521BEA83D00AF035A /* LXDiskCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXDiskCache.m; sourceTree = "<group>"; };
-		733E894721BEA86300AF035A /* LXSqlit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSqlit.h; sourceTree = "<group>"; };
-		733E894821BEA86300AF035A /* LXSqlit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXSqlit.m; sourceTree = "<group>"; };
+		73402E0721BFA9C30090CBC7 /* LXSqlite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSqlite.h; sourceTree = "<group>"; };
+		73402E0821BFA9C30090CBC7 /* LXSqlite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXSqlite.m; sourceTree = "<group>"; };
 		7349A809218AF03A0073077B /* LXCache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXCache.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7349A80C218AF03A0073077B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7349A80D218AF03A0073077B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -84,8 +84,8 @@
 				733E893F21BEA82300AF035A /* LXKVStorage.m */,
 				733E894121BEA82F00AF035A /* LXMemoryCache.h */,
 				733E894221BEA82F00AF035A /* LXMemoryCache.m */,
-				733E894721BEA86300AF035A /* LXSqlit.h */,
-				733E894821BEA86300AF035A /* LXSqlit.m */,
+				73402E0721BFA9C30090CBC7 /* LXSqlite.h */,
+				73402E0821BFA9C30090CBC7 /* LXSqlite.m */,
 				733E894421BEA83D00AF035A /* LXDiskCache.h */,
 				733E894521BEA83D00AF035A /* LXDiskCache.m */,
 			);
@@ -231,7 +231,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				733E893A21BEA32100AF035A /* LXCache.m in Sources */,
-				733E894921BEA86300AF035A /* LXSqlit.m in Sources */,
 				7349A811218AF03A0073077B /* ViewController.m in Sources */,
 				7349A81C218AF03B0073077B /* main.m in Sources */,
 				733E894321BEA82F00AF035A /* LXMemoryCache.m in Sources */,
@@ -240,6 +239,7 @@
 				733E894621BEA83D00AF035A /* LXDiskCache.m in Sources */,
 				73185D202195C352005F1B96 /* SubViewController.m in Sources */,
 				733E893D21BEA5F400AF035A /* LXSeparateCache.m in Sources */,
+				73402E0921BFA9C30090CBC7 /* LXSqlite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

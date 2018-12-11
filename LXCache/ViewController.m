@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LXCache.h"
+#import "SubViewController.h"
 @interface ViewController ()
 
 @end
@@ -21,7 +22,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-//    [self presentViewController:[SubViewController new] animated:YES completion:nil];
+    [self presentViewController:[SubViewController new] animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
