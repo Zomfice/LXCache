@@ -20,6 +20,8 @@
 		7349A816218AF03B0073077B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7349A815218AF03B0073077B /* Assets.xcassets */; };
 		7349A819218AF03B0073077B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7349A817218AF03B0073077B /* LaunchScreen.storyboard */; };
 		7349A81C218AF03B0073077B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A81B218AF03B0073077B /* main.m */; };
+		73546C3121E6CF3C007FA573 /* RHCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 73546C2D21E6CF3B007FA573 /* RHCacheManager.m */; };
+		73546C3221E6CF3C007FA573 /* RHCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 73546C3021E6CF3B007FA573 /* RHCache.m */; };
 		C9F0492D29628A6432BE3212 /* libPods-LXCache.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A75564ECC7F1315892BBE56 /* libPods-LXCache.a */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,10 @@
 		7349A818218AF03B0073077B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7349A81A218AF03B0073077B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7349A81B218AF03B0073077B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		73546C2D21E6CF3B007FA573 /* RHCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCacheManager.m; sourceTree = "<group>"; };
+		73546C2E21E6CF3B007FA573 /* RHCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCache.h; sourceTree = "<group>"; };
+		73546C2F21E6CF3B007FA573 /* RHCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCacheManager.h; sourceTree = "<group>"; };
+		73546C3021E6CF3B007FA573 /* RHCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCache.m; sourceTree = "<group>"; };
 		E5DF957B8416256D5159F746 /* Pods-LXCache.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXCache.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXCache/Pods-LXCache.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +119,7 @@
 		7349A80B218AF03A0073077B /* LXCache */ = {
 			isa = PBXGroup;
 			children = (
+				73546C2C21E6CF3B007FA573 /* RHCaches */,
 				733E893721BEA2DC00AF035A /* LXCache */,
 				7349A80C218AF03A0073077B /* AppDelegate.h */,
 				7349A80D218AF03A0073077B /* AppDelegate.m */,
@@ -127,6 +134,17 @@
 				7349A81B218AF03B0073077B /* main.m */,
 			);
 			path = LXCache;
+			sourceTree = "<group>";
+		};
+		73546C2C21E6CF3B007FA573 /* RHCaches */ = {
+			isa = PBXGroup;
+			children = (
+				73546C2D21E6CF3B007FA573 /* RHCacheManager.m */,
+				73546C2E21E6CF3B007FA573 /* RHCache.h */,
+				73546C2F21E6CF3B007FA573 /* RHCacheManager.h */,
+				73546C3021E6CF3B007FA573 /* RHCache.m */,
+			);
+			path = RHCaches;
 			sourceTree = "<group>";
 		};
 		DEF9698A1A8E9D2463B68717 /* Pods */ = {
@@ -230,11 +248,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73546C3121E6CF3C007FA573 /* RHCacheManager.m in Sources */,
 				733E893A21BEA32100AF035A /* LXCache.m in Sources */,
 				7349A811218AF03A0073077B /* ViewController.m in Sources */,
 				7349A81C218AF03B0073077B /* main.m in Sources */,
 				733E894321BEA82F00AF035A /* LXMemoryCache.m in Sources */,
 				7349A80E218AF03A0073077B /* AppDelegate.m in Sources */,
+				73546C3221E6CF3C007FA573 /* RHCache.m in Sources */,
 				733E894021BEA82300AF035A /* LXKVStorage.m in Sources */,
 				733E894621BEA83D00AF035A /* LXDiskCache.m in Sources */,
 				73185D202195C352005F1B96 /* SubViewController.m in Sources */,
