@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [LXCache defaultCache].identity(@"");
+    [LXCache defaultCache].identity(@"mmSay");
     // Do any additional setup after loading the view, typically from a nib.
 }
 

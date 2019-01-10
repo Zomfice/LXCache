@@ -139,9 +139,9 @@
 		73546C2C21E6CF3B007FA573 /* RHCaches */ = {
 			isa = PBXGroup;
 			children = (
+				73546C2F21E6CF3B007FA573 /* RHCacheManager.h */,
 				73546C2D21E6CF3B007FA573 /* RHCacheManager.m */,
 				73546C2E21E6CF3B007FA573 /* RHCache.h */,
-				73546C2F21E6CF3B007FA573 /* RHCacheManager.h */,
 				73546C3021E6CF3B007FA573 /* RHCache.m */,
 			);
 			path = RHCaches;
