@@ -8,11 +8,53 @@
 
 #import "LXCache.h"
 #import "LXSeparateCache.h"
-
-
+#import "LXSafeDictionary.h"
+#import "LXKeyCacheProtocol.h"
 #define LXDefalutCachePath @".kLXCache"
+
+@interface _lxKeyObject : NSObject<LXKeyCacheProtocol>{
+    @package
+    NSString *_key;
+    NSString * _identity;
+    NSTimeInterval _memoryTime, _diskTime, _saveTime;
+    LXCacheType _cacheType;
+    BOOL _isClearWhenCache;
+}
+
+@end
+
+@implementation _lxKeyObject
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _memoryTime = -1;
+        _diskTime = -1;
+    }
+    return self;
+}
+
+- (NSString *)getKey{
+    return _key;
+}
+- (NSString *)getIdentify{
+    return _identity;
+}
+- (NSTimeInterval)getMemoryTime{
+    return _memoryTime;
+}
+- (NSTimeInterval)getDiskTime{
+    return _diskTime;
+}
+- (BOOL)isClearWhenTimeOut{
+    return _isClearWhenCache;
+}
+
+@end
+
 @interface LXCache ()
-@property (nonatomic, strong) NSMutableDictionary <NSString *, LXSeparateCache *> * separateMap;
+@property (nonatomic, strong) LXSafeDictionary <NSString *, LXSeparateCache *> * separateMap;
+@property (nonatomic, strong) LXSafeDictionary <NSString *,id <LXKeyCacheProtocol>>* keyMap;
 @property (nonatomic, copy) NSString * path;
 @property (nonatomic, strong) LXSeparateCache * defaultSeparate;
 @end
@@ -49,18 +91,24 @@
         LXSeparateCache *separate;
         if ([identity isKindOfClass:[NSString class]]) {
             if (identity.length > 0) {
-                
+                separate = self.separateMap[identity];
+                if (!separate) {
+                    separate = [[LXSeparateCache alloc] initWithIdentity:identity];
+                    [self.separateMap setValue:separate forKey:identity];
+                }
             }
         }
         return separate;
     };
 }
 
-- (NSMutableDictionary<NSString *,LXSeparateCache *> *)separateMap{
+- (LXSafeDictionary<NSString *,LXSeparateCache *> *)separateMap{
     if (!_separateMap) {
-        _separateMap = [NSMutableDictionary dictionary];
+        _separateMap = [LXSafeDictionary dictionary];
     }
     return _separateMap;
 }
+
+
 
 @end

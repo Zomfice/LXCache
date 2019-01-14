@@ -10,36 +10,19 @@
 #import "LXSeparateCache.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LXCache : NSObject
+@interface LXCache : NSObject<LXSeparateCacheProtocol>
 
 //单例
-+ (LXCache *)defaultCache;
++ (LXCache *)defaultCache; 
 
-//创建一个缓存管理工具
-- (instancetype)initWithPath:(NSString *)path;
-
+//创建一个自定义缓存管理工具
+- (instancetype)initWithPathIdentity:(NSString *)identity;
 
 //默认缓存实例
 @property (nonatomic, strong, readonly) LXSeparateCache * defaultSeparate;
 
 //分区缓存实例
 @property (nonatomic, copy, readonly) LXSeparateCache *(^ identity) (NSString * identity);
-
-- (void)removeSeparaCacheWithIdentity:(NSString *)identity;
-
-- (BOOL)containsObjectForKey:(NSString *)key;
-
-- (void)containsObjectForKey:(NSString *)key
-                   withBlock:(void (^) (NSString *key, BOOL contains))block;
-
-- (id <NSCoding>)objectForKey:(NSString *)key;
-
-- (void)objectForKey:(NSString *)key
-           withBlock:(void (^) (NSString *key, id <NSCoding>object))block;
-
-- (void)setObject:(id <NSCoding>)object forKey:(NSString *)key;
-
-- (CGFloat)totalSize;
 
 @end
 

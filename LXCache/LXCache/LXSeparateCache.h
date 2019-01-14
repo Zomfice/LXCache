@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "LXSeparateCacheProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LXSeparateCache : NSObject
-- (instancetype)initWithPath:(NSString *)path;
+@interface LXSeparateCache : NSObject<LXSeparateCacheProtocol>
+- (instancetype)initWithIdentity:(NSString *)identity;
 @end
 
 NS_ASSUME_NONNULL_END

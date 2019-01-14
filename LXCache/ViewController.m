@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LXCache.h"
+#import "SubViewController.h"
 @interface ViewController ()
 
 @end
@@ -16,12 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [LXCache defaultCache].identity(@"");
+    
+    [LXCache defaultCache].identity(@"mmSay");
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-//    [self presentViewController:[SubViewController new] animated:YES completion:nil];
+    [self presentViewController:[SubViewController new] animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

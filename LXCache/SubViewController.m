@@ -10,7 +10,7 @@
 
 #define WIDTH [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
-#define HeaderHeight 150
+#define HeaderHeight 300
 #define titleViewHeight 100
 #define imageViewHeight (HeaderHeight - titleViewHeight)
 @interface SubViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -58,7 +58,7 @@
         frame.origin.y = 0;
         self.headerView.frame = frame;
     }
-    NSLog(@"%f", -originY);
+//    NSLog(@"%f", -originY);
 }
 
 - (void)loadView{
@@ -94,7 +94,7 @@
         label.frame = CGRectMake(0, 0, WIDTH, HeaderHeight / 2);
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
-        label.text = @"销量";
+        label.text = [@"销量" stringByAppendingFormat:@"%ld",section];
     }
     return view;
 }
