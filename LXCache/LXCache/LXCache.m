@@ -46,7 +46,6 @@
     __weak typeof(self)weakSelf = self;
     return ^(NSString *identity){
         __strong typeof(weakSelf)self = weakSelf;
-        
         LXSeparateCache *separate;
         if ([identity isKindOfClass:[NSString class]]) {
             if (identity.length > 0) {

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setUserName:(NSString *)userName password:(NSString *)password;
 
 //更新账号密码
-- (void)udpateUserName:(NSString *)userName password:(NSString *)password;
+- (void)updateUserName:(NSString *)userName password:(NSString *)password;
 
 @end
 
