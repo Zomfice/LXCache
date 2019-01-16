@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LXSeparateCacheProtocol <NSObject>
 
+@property (nonatomic, strong) id <LXSeparateCacheProtocol> defaultDeal;
 
 /**
  清除表
@@ -147,5 +148,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @end
+
 
 NS_ASSUME_NONNULL_END

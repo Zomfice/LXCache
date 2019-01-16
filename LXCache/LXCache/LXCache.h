@@ -26,11 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  通过账号密码进入数据库
+ 如果没有设置，则为创建账号密码
  */
 - (void)openWithUserName:(NSString *)userName password:(NSString *)password;
 
 /**
  更新密码
+ 没有设置密码则不会更新
  */
 - (void)updatePassword:(NSString *)password;
 
@@ -41,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param identity 分区标识
  @return 返回一个可操作的缓存分区
  */
-@property (nonatomic, copy, readonly) id <LXSeparateCacheProtocol> (^ identity) (NSString * identity);
+@property (nonatomic, copy, readonly, nullable) id <LXSeparateCacheProtocol>  (^ identity) (NSString * identity);
 
 
 #pragma mark - 移除缓存 -

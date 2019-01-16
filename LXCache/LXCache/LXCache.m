@@ -8,6 +8,7 @@
 
 #import "LXCache.h"
 #import "LXSafeDictionary.h"
+#import "LXSqlite.h"
 #define kLXDefalutCachePath @".kLXDeafultCache"
 #define kLXDefalutIdentify @".kLXDeafultCacheIdentify"
 #pragma mark - _lxKeyObject -
@@ -46,13 +47,79 @@
 
 @implementation LXSeparateCache
 
+- (BOOL)removeSeparaAllCache{
+    return YES;
+}
+
+- (void)removeSeparaAllCacheWithBlock:(void (^)(BOOL))block{
+    
+}
+
+- (BOOL)containsObjectForKey:(NSString *)key,...{
+    
+}
+
+- (void)containsObjectForKey:(NSString *)key
+                   withBlock:(void (^) (NSString *key, BOOL contains))block,...;
+
+- (void)containsSynObjectForKey:(NSString *)key
+                      withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
+
+- (void)containsAsynObjectDetailForKey:(NSString *)key
+                             withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
+
+- (id <NSCoding>)objectForKey:(NSString *)key,...;
+
+- (void)objectSynForKey:(NSString *)key
+              withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block, ...;
+
+- (void)objectForKey:(NSString *)key
+           withBlock:(void (^) (NSString *key, id <NSCoding>object))block,...;
+
+
+- (void)objectAsynForKey:(NSString *)key
+               withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block,...;
+
+- (BOOL)setObject:(id <NSCoding>)object forKey:(NSString *)key, ...;
+
+- (void)setObject:(id <NSCoding>)object
+           forKey:(NSString *)key
+        withBlock:(void (^) (NSString *key, id <NSCoding>object, BOOL isSuccess))block,...;
+
+- (BOOL)removeObjectForKey:(NSString *)key;
+
+- (void)removeObjectForKey:(NSString *)key
+                 withBlock:(void (^) (NSString *key, id <NSCoding> object))block;
+
+- (void)setDefaultMemoryTime:(NSTimeInterval)memoryTime
+                    diskTime:(NSTimeInterval)diskTime
+          isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
+
+- (void)setSaveMemoryTime:(NSTimeInterval)memoryTime
+                 diskTime:(NSTimeInterval)diskTime
+       isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
+
+- (CGFloat)cacheSize;
+
+- (id<LXSeparateCacheProtocol>)defaultDeal{
+    return self;
+}
+
 @end
 
 @interface LXCache ()
+{
+    NSString *_userName;
+    NSString *_password;
+}
 @property (nonatomic, strong) LXSafeDictionary <NSString *, LXSeparateCache *> * separateMap;
 @property (nonatomic, strong) LXSafeDictionary <NSString *,id <LXKeyCacheProtocol>>* keyMap;
 @property (nonatomic, copy) NSString * path;
 @property (nonatomic, strong) LXSeparateCache * defaultSeparate;
+@property (nonatomic, strong) NSArray * blackIdentities;
+@property (nonatomic, strong) NSArray * whiteIdentities;
+@property (nonatomic, strong) LXSqlite * sqlit;
+
 @end
 @implementation LXCache
 
@@ -70,21 +137,56 @@
 - (instancetype)initWithPath:(NSString *)path{
     if (self = [super init]) {
         self.path = path;
-        [self loadData];
+        _sqlit = [[LXSqlite alloc] initWithPath:path];
+        
+        [self open];
     }
     return self;
+}
+#pragma mark - 设置密码 -
+- (void)openWithUserName:(NSString *)userName password:(NSString *)password{
+    _userName = userName;
+    _password = password;
+    [_sqlit setUserName:userName password:password];
+    [self open];
+}
+
+- (void)updatePassword:(NSString *)password{
+    if (_userName.length == 0) return;
+    if ([self.sqlit updateUserName:_userName password:password]){
+        _password = password;
+    }
+}
+
+#pragma mark - 打开 -
+- (void)open{
+    if ([_sqlit open]) {
+        [self loadData];
+    }
 }
 
 - (void)loadData{
     
 }
 
+#pragma mark - 数据处理 -
 
+
+
+- (LXSafeDictionary<NSString *,LXSeparateCache *> *)separateMap{
+    if (!_separateMap) {
+        _separateMap = [LXSafeDictionary dictionary];
+    }
+    return _separateMap;
+}
+
+#pragma mark - 交互逻辑 -
 - (id<LXSeparateCacheProtocol>  _Nonnull (^)(NSString * _Nonnull))identity{
     __weak typeof(self)weakSelf = self;
-    return ^(NSString *identity){
+    return ^( NSString *identity){
         __strong typeof(weakSelf)self = weakSelf;
         LXSeparateCache *separate;
+        if (!self) return separate;
         if ([identity isKindOfClass:[NSString class]]) {
             if (identity.length > 0) {
                 separate = self.separateMap[identity];
@@ -98,12 +200,11 @@
     };
 }
 
-- (LXSafeDictionary<NSString *,LXSeparateCache *> *)separateMap{
-    if (!_separateMap) {
-        _separateMap = [LXSafeDictionary dictionary];
-    }
-    return _separateMap;
+
+- (id<LXSeparateCacheProtocol>)defaultDeal{
+    return self.defaultDeal;
 }
+#pragma mark - 全局处理 -
 
 - (BOOL)removeSeparaCacheWithIdentity:(NSString *)identity{
     if (identity.length == 0) return YES;
@@ -130,5 +231,17 @@
 - (void)removeDefaultSeparaCacheWithBlock:(void (^) (BOOL success))block{
     [self removeSeparaCacheWithIdentity:kLXDefalutIdentify withBlock:block];
 }
+
+- (void)cacheWithBlackIdentities:(NSArray<NSString *> *)identities{
+    if ([self.blackIdentities isEqualToArray:identities]) return;
+    self.blackIdentities = identities;
+    if (self.whiteIdentities.count > 0) return;
+}
+
+- (void)cacheWithWhiteIdentities:(NSArray<NSString *> *)identities{
+    if ([self.whiteIdentities isEqualToArray:identities]) return;
+    self.whiteIdentities = identities;
+}
+
 
 @end
