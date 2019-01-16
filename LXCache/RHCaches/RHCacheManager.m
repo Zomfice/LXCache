@@ -37,6 +37,7 @@
 }
 
 @end
+
 @interface RHCacheManager (){
     pthread_mutex_t _lock;
 }

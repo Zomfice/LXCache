@@ -17,7 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [LXCache defaultCache].identity(@"");
+    
+    [[LXCache defaultCache].identity(@"mmSay").cacheType(LXCacheDisk) setObject:@"" forKey:@"" withBlock:^(NSString * _Nonnull key, id<NSCoding>  _Nonnull object, BOOL isSuccess) {
+        
+    }];
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
