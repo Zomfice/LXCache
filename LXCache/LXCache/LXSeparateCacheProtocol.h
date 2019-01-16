@@ -7,17 +7,11 @@
 //
 
 #import "LXCacheDefine.h"
-
+#import "LXKeyCacheProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol LXSeparateCacheProtocol <NSObject>
 
-@property (nonatomic, copy, readonly) id <LXSeparateCacheProtocol> (^ cacheType)(LXCacheType cacheType);
-@property (nonatomic, copy, readonly) id <LXSeparateCacheProtocol> (^ memoryTime)(NSTimeInterval memoryTime);
-@property (nonatomic, copy, readonly) id <LXSeparateCacheProtocol> (^ diskTime)(NSTimeInterval diskTime);
-@property (nonatomic, copy, readonly) id <LXSeparateCacheProtocol> (^ isClearWhenTimeOut)(BOOL isClearWhenTimeOut);
-
-@property (nonatomic, strong, readonly) id <LXSeparateCacheProtocol> separateCache;
 
 /**
  清除表
@@ -35,46 +29,71 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param key 键值
  */
-- (BOOL)containsObjectForKey:(NSString *)key;
+
+- (BOOL)containsObjectForKey:(NSString *)key,...;
 
 /**
  
- 异步判断否包含存储对象
+ 异步判断否包含存储对象  ... : 传入查询状态，LXCacheResultStatus
 
  @param key 键值
  @param block block回调
  */
 - (void)containsObjectForKey:(NSString *)key
-                   withBlock:(void (^) (NSString *key, BOOL contains))block;
+                   withBlock:(void (^) (NSString *key, BOOL contains))block,...;
 
 /**
- 同步获取存储对象
+ 同步判断否包含存储对象  ... : 传入查询状态，LXCacheResultStatus
+ 
+ @param key 键值
+ @param block block回调
+ */
+- (void)containsSynObjectForKey:(NSString *)key
+                   withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
+
+/**
+ 异步判断否包含存储对象  ... : 传入查询状态，LXCacheResultStatus
+ 
+ @param key 键值
+ @param block block回调
+ */
+- (void)containsAsynObjectDetailForKey:(NSString *)key
+                         withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
+
+/**
+ 同步获取存储对象  ... : 传入查询状态，LXCacheResultStatus
 
  @param key 键值
  @return 存储对象
+ 
  */
-- (id <NSCoding>)objectForKey:(NSString *)key;
+- (id <NSCoding>)objectForKey:(NSString *)key,...;
 
+- (void)objectSynForKey:(NSString *)key
+              withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block, ...;
 /**
- 异步获取存储对象
+ 异步获取存储对象 ... : 传入查询状态，LXCacheResultStatus
 
  @param key 键值
  @param block 回调
  */
 - (void)objectForKey:(NSString *)key
-           withBlock:(void (^) (NSString *key, id <NSCoding>object))block;
+           withBlock:(void (^) (NSString *key, id <NSCoding>object))block,...;
 
 
+- (void)objectAsynForKey:(NSString *)key
+               withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block,...;
 /**
- 
+ 缓存设置，设置完key后可设置：...:分别传入缓存类型、内存缓存时间、磁盘缓存时间、是否过期清空
  
  @param object 存储对象
  @param key 键值
+ 
  */
-- (BOOL)setObject:(id <NSCoding>)object forKey:(NSString *)key;
+- (BOOL)setObject:(id <NSCoding>)object forKey:(NSString *)key, ...;
 
 /**
- 异步缓存
+ 异步缓存  ... : 传入查询状态，LXCacheResultStatus
 
  @param object 存储对象
  @param key 键值
@@ -82,17 +101,32 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setObject:(id <NSCoding>)object
            forKey:(NSString *)key
-        withBlock:(void (^) (NSString *key, id <NSCoding>object, BOOL isSuccess))block;
+        withBlock:(void (^) (NSString *key, id <NSCoding>object, BOOL isSuccess))block,...;
+
+
+/**
+ 移除key
+ */
+- (BOOL)removeObjectForKey:(NSString *)key;
+
+/**
+ 异步移除key
+
+ @param key 键值
+ @param block 回调
+ */
+- (void)removeObjectForKey:(NSString *)key
+                 withBlock:(void (^) (NSString *key, id <NSCoding> object))block;
 
 /**
  设置分区存储数据默认时间
 
  @param memoryTime 内存缓存时间
- @param disTime 磁盘缓存时间
+ @param diskTime 磁盘缓存时间
  @param isClearWhenTimeOut 是否过期清除
  */
 - (void)setDefaultMemoryTime:(NSTimeInterval)memoryTime
-             diskTime:(NSTimeInterval)disTime
+             diskTime:(NSTimeInterval)diskTime
    isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
 
 
@@ -100,11 +134,11 @@ NS_ASSUME_NONNULL_BEGIN
  设置缓存实例默认缓存时间属性
 
  @param memoryTime 内存缓存时间
- @param disTime 磁盘缓存时间
+ @param diskTime 磁盘缓存时间
  @param isClearWhenTimeOut 是否过期清除
  */
-- (void)setClearMemoryTime:(NSTimeInterval)memoryTime
-                    diskTime:(NSTimeInterval)disTime
+- (void)setSaveMemoryTime:(NSTimeInterval)memoryTime
+                    diskTime:(NSTimeInterval)diskTime
           isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
 /**
  缓存大小

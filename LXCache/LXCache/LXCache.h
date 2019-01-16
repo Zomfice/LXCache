@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LXSeparateCacheProtocol.h"
-#import "LXKeyCacheProtocol.h"
+#import "LXGlobalCacheProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface LXCache : NSObject<LXSeparateCacheProtocol>
+@interface LXCache : NSObject<LXSeparateCacheProtocol,LXGlobalCacheProtocol>
 
 //单例
 + (LXCache *)defaultCache;
@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)updatePassword:(NSString *)password;
 
+
 /**
  创建一个自定义缓存管理分区
  
@@ -41,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return 返回一个可操作的缓存分区
  */
 @property (nonatomic, copy, readonly) id <LXSeparateCacheProtocol> (^ identity) (NSString * identity);
+
 
 #pragma mark - 移除缓存 -
 
