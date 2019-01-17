@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "LXCache.h"
 #import "SubViewController.h"
+#import <objc/runtime.h>
 @interface ViewController ()
 
 @end
@@ -18,7 +19,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[LXCache defaultCache].identity(@"mmSay") setob];
+    BOOL showRequiredMethods = NO;
+    BOOL showInstanceMethods = YES;
+
+    unsigned int methodCount = 0;
+    struct objc_method_description *methods = protocol_copyMethodDescriptionList(@protocol(LXaaSeparateCacheProtocol) , showRequiredMethods, showInstanceMethods, &methodCount);
+
+    NSLog(@"%d required instance methods found:", methodCount);
+
+    for (int i = 0; i < methodCount; i++)
+    {
+        struct objc_method_description methodDescription = methods[i];
+        NSLog(@"Method #%d: %@", i, NSStringFromSelector(methodDescription.name));
+    }
+
+    free(methods);
+    [[LXCache defaultCache] removeSeparaAllCacheWithBlock:^(BOOL success) {
+        
+    }];
+    [[LXCache defaultCache].identity(@"default") removeSeparaAllCacheWithBlock:^(BOOL success) {
+        
+    }];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

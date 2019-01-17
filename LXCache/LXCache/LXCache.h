@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LXSeparateCacheProtocol.h"
-#import "LXGlobalCacheProtocol.h"
+#import "LXCacheProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
 

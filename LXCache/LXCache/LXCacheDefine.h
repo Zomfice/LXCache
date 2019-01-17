@@ -29,4 +29,9 @@ typedef NS_ENUM(NSUInteger, LXCachePosition) {
     LXDataDiskContain
 };
 
+#define lx_concrete \
+optional
+
+
+
 #endif /* LXCacheDefine_h */

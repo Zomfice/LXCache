@@ -38,76 +38,24 @@
 @end
 #pragma mark - LXSeparateCache -
 
-@interface LXSeparateCache : NSObject<LXSeparateCacheProtocol>
 
-- (instancetype)initWithIdentity:(NSString *)identity;
+@interface LXSeparateCache : NSObject<LXSeparateCacheDelegate, LXSeparateCacheProtocol>
 
 @end
-
 
 @implementation LXSeparateCache
 
-- (BOOL)removeSeparaAllCache{
-    return YES;
-}
+//@synthesize delegate = _delegate;
 
-- (void)removeSeparaAllCacheWithBlock:(void (^)(BOOL))block{
+- (instancetype)initWithIdentity:(NSString *)identity{
     
+    return [self init];
 }
 
-- (BOOL)containsObjectForKey:(NSString *)key,...{
-    
-}
-
-- (void)containsObjectForKey:(NSString *)key
-                   withBlock:(void (^) (NSString *key, BOOL contains))block,...;
-
-- (void)containsSynObjectForKey:(NSString *)key
-                      withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
-
-- (void)containsAsynObjectDetailForKey:(NSString *)key
-                             withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
-
-- (id <NSCoding>)objectForKey:(NSString *)key,...;
-
-- (void)objectSynForKey:(NSString *)key
-              withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block, ...;
-
-- (void)objectForKey:(NSString *)key
-           withBlock:(void (^) (NSString *key, id <NSCoding>object))block,...;
-
-
-- (void)objectAsynForKey:(NSString *)key
-               withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block,...;
-
-- (BOOL)setObject:(id <NSCoding>)object forKey:(NSString *)key, ...;
-
-- (void)setObject:(id <NSCoding>)object
-           forKey:(NSString *)key
-        withBlock:(void (^) (NSString *key, id <NSCoding>object, BOOL isSuccess))block,...;
-
-- (BOOL)removeObjectForKey:(NSString *)key;
-
-- (void)removeObjectForKey:(NSString *)key
-                 withBlock:(void (^) (NSString *key, id <NSCoding> object))block;
-
-- (void)setDefaultMemoryTime:(NSTimeInterval)memoryTime
-                    diskTime:(NSTimeInterval)diskTime
-          isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
-
-- (void)setSaveMemoryTime:(NSTimeInterval)memoryTime
-                 diskTime:(NSTimeInterval)diskTime
-       isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
-
-- (CGFloat)cacheSize;
-
-- (id<LXSeparateCacheProtocol>)defaultDeal{
-    return self;
-}
 
 @end
 
-@interface LXCache ()
+@interface LXCache ()<LXSeparateCacheProtocol,LXSeparateCacheDelegate>
 {
     NSString *_userName;
     NSString *_password;
@@ -180,6 +128,10 @@
     return _separateMap;
 }
 
+#pragma mark - LXSeparateCacheDelegate -
+
+
+
 #pragma mark - 交互逻辑 -
 - (id<LXSeparateCacheProtocol>  _Nonnull (^)(NSString * _Nonnull))identity{
     __weak typeof(self)weakSelf = self;
@@ -192,6 +144,7 @@
                 separate = self.separateMap[identity];
                 if (!separate) {
                     separate = [[LXSeparateCache alloc] initWithIdentity:identity];
+                    separate.delegate = self;
                     [self.separateMap setValue:separate forKey:identity];
                 }
             }
