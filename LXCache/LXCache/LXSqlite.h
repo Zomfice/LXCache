@@ -15,11 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 //设置地址
 - (instancetype)initWithPath:(NSString *)path;
 
+- (BOOL)open;
 //设置账号密码
 - (void)setUserName:(NSString *)userName password:(NSString *)password;
 
 //更新账号密码
-- (void)updateUserName:(NSString *)userName password:(NSString *)password;
+- (BOOL)updateUserName:(NSString *)userName password:(NSString *)password;
 
 @end
 
