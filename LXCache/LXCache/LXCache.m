@@ -52,8 +52,21 @@
     return [self init];
 }
 
-- (BOOL)containsObjectForKey:(NSString *)key, ...{
-    NSLog(@"maxiaoliang%@", self);
+void va_loopTimes(va_list list, NSUInteger count, ^()(va_list list, NSUInteger index){
+    
+})
+
+
+- (BOOL)containsObjectForKey:(NSString *)key, ... {
+    
+    va_list aa;
+    va_start(aa, key);
+    va_list bb = va_arg(aa, va_list);
+    for (NSString *str = key; str != nil; str = va_arg(bb, NSString*)) {
+        NSLog(@"%@",str);
+    }
+    va_end(bb);
+    va_end(aa);
     return YES;
 }
 

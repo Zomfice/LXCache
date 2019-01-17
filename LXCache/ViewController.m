@@ -38,8 +38,8 @@
 //    }
 
 //    free(methods);
-//    [[LXCache defaultCache] containsObjectForKey:@"asdf"];
-//    [[LXCache defaultCache].identity(@"default") containsObjectForKey:@"asdf"];
+    [[LXCache defaultCache] containsObjectForKey:@"aaaaa1",@"bbbbbb1",@"asdfasdfsd",@"asdfasdfsdf", nil];
+//    [[LXCache defaultCache].identity(@"default") containsObjectForKey:@"aaaaa2",@"bbbbbb2",nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

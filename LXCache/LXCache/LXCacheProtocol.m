@@ -10,9 +10,19 @@
 #import "NSObject+LXCategory.h"
 #import "LXProtocolExtension.h"
 
+#define LXPassParaMehtod(method,key ,value)\
+if(self.separateCache){\
+[self.separateCache Pasd(method,:) key,value];\
+}
+
+
+#define Pasd(method, a)\
+method##a
+
 #pragma mark - LXSeparateCacheProtocol默认实现  -
 @protocolExtension(LXSeparateCacheProtocol)
- 
+
+
 
 @synthesize delegate = _delegate;
 
@@ -27,20 +37,12 @@
 }
 
 - (BOOL)containsObjectForKey:(NSString *)key,...{
-    if(self.separateCache){
-        NSMethodSignature *sig = [self methodSignatureForSelector:_cmd];
-        if (!sig){[self doesNotRecognizeSelector:_cmd]; return NO;}
-        NSInvocation *invoctation = [NSInvocation invocationWithMethodSignature:sig];
-        invoctation.target = self.separateCache;
-        invoctation.selector = _cmd;
-        va_list args;
-        va_start(args, key);
-        [NSObject setInv:invoctation withSig:sig andArgs:args];
-        va_end(args);
-        [invoctation invoke];
-        return [[self getInvocationFromInv:invoctation sig:sig] boolValue];
+    if (self.separateCache){
+        va_list list;
+        va_start(list, key);
+        return [self.separateCache containsObjectForKey:key,list, nil];
     }
-    
+    NSLog(@"困啊困");
     return YES;
 }
 
