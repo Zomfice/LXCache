@@ -6,9 +6,6 @@
 //  Copyright © 2019 xllpp. All rights reserved.
 //
 #import "LXCacheDefine.h"
-#import "EXTConcreteProtocol.h"
-#import "LXConcreteProtocol.h"
-//#import "EXTConcreteProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 @protocol LXSeparateCacheDelegate <NSObject>
 

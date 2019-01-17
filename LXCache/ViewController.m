@@ -10,6 +10,7 @@
 #import "LXCache.h"
 #import "SubViewController.h"
 #import <objc/runtime.h>
+#import "NSObject+LXCategory.h"
 @interface ViewController ()
 
 @end
@@ -19,28 +20,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    BOOL showRequiredMethods = NO;
-    BOOL showInstanceMethods = YES;
+    [self performSelectorWithArguments:@selector(asdkf::),@"aa",4];
+    [self performSelectorWithArguments:@selector(a)];
+    
+//    BOOL showRequiredMethods = NO;
+//    BOOL showInstanceMethods = YES;
+//
+//    unsigned int methodCount = 0;
+//    struct objc_method_description *methods = protocol_copyMethodDescriptionList(@protocol(LXaaSeparateCacheProtocol) , showRequiredMethods, showInstanceMethods, &methodCount);
+//
+//    NSLog(@"%d required instance methods found:", methodCount);
+//
+//    for (int i = 0; i < methodCount; i++)
+//    {
+//        struct objc_method_description methodDescription = methods[i];
+//        NSLog(@"Method #%d: %@", i, NSStringFromSelector(methodDescription.name));
+//    }
 
-    unsigned int methodCount = 0;
-    struct objc_method_description *methods = protocol_copyMethodDescriptionList(@protocol(LXaaSeparateCacheProtocol) , showRequiredMethods, showInstanceMethods, &methodCount);
-
-    NSLog(@"%d required instance methods found:", methodCount);
-
-    for (int i = 0; i < methodCount; i++)
-    {
-        struct objc_method_description methodDescription = methods[i];
-        NSLog(@"Method #%d: %@", i, NSStringFromSelector(methodDescription.name));
-    }
-
-    free(methods);
-    [[LXCache defaultCache] removeSeparaAllCacheWithBlock:^(BOOL success) {
-        
-    }];
-    [[LXCache defaultCache].identity(@"default") removeSeparaAllCacheWithBlock:^(BOOL success) {
-        
-    }];
+//    free(methods);
+//    [[LXCache defaultCache] containsObjectForKey:@"asdf"];
+//    [[LXCache defaultCache].identity(@"default") containsObjectForKey:@"asdf"];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)asdkf:(NSString *)adf :(CGFloat)asdf{
+    NSLog(@"1");
+}
+
+- (void)a{
+    NSLog(@"2");
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

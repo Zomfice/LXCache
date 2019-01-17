@@ -52,7 +52,14 @@
     return [self init];
 }
 
+- (BOOL)containsObjectForKey:(NSString *)key, ...{
+    NSLog(@"maxiaoliang%@", self);
+    return YES;
+}
 
+- (id<LXSeparateCacheProtocol>)separateCache{
+    return self;
+}
 @end
 
 @interface LXCache ()<LXSeparateCacheProtocol,LXSeparateCacheDelegate>
@@ -63,7 +70,7 @@
 @property (nonatomic, strong) LXSafeDictionary <NSString *, LXSeparateCache *> * separateMap;
 @property (nonatomic, strong) LXSafeDictionary <NSString *,id <LXKeyCacheProtocol>>* keyMap;
 @property (nonatomic, copy) NSString * path;
-@property (nonatomic, strong) LXSeparateCache * defaultSeparate;
+@property (nonatomic, strong) id <LXSeparateCacheProtocol> defaultSeparate;
 @property (nonatomic, strong) NSArray * blackIdentities;
 @property (nonatomic, strong) NSArray * whiteIdentities;
 @property (nonatomic, strong) LXSqlite * sqlit;
@@ -86,7 +93,7 @@
     if (self = [super init]) {
         self.path = path;
         _sqlit = [[LXSqlite alloc] initWithPath:path];
-        
+        _defaultSeparate = self.identity(kLXDefalutIdentify);
         [self open];
     }
     return self;
@@ -154,8 +161,8 @@
 }
 
 
-- (id<LXSeparateCacheProtocol>)defaultDeal{
-    return self.defaultDeal;
+- (id<LXSeparateCacheProtocol>)separateCache{
+    return self.defaultSeparate;
 }
 #pragma mark - 全局处理 -
 

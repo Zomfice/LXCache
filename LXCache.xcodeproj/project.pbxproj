@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		73083EFD21F02859005047C4 /* LXRuntimeExtensiions.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083EFC21F02859005047C4 /* LXRuntimeExtensiions.m */; };
-		73083F0021F02884005047C4 /* LXConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083EFF21F02884005047C4 /* LXConcreteProtocol.m */; };
 		73083F0321F0B5B2005047C4 /* LXCacheProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F0221F0B5B2005047C4 /* LXCacheProtocol.m */; };
 		73083F1321F0C36C005047C4 /* EXTConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F0F21F0C36B005047C4 /* EXTConcreteProtocol.m */; };
 		73083F1421F0C36C005047C4 /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1221F0C36C005047C4 /* EXTRuntimeExtensions.m */; };
+		73083F1721F0D5E7005047C4 /* NSObject+LXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1621F0D5E7005047C4 /* NSObject+LXCategory.m */; };
+		73083F1D21F0F7A1005047C4 /* LXProtocolExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1C21F0F7A1005047C4 /* LXProtocolExtension.m */; };
 		73185D202195C352005F1B96 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73185D1F2195C352005F1B96 /* SubViewController.m */; };
 		733E893A21BEA32100AF035A /* LXCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893921BEA32100AF035A /* LXCache.m */; };
 		733E894021BEA82300AF035A /* LXKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893F21BEA82300AF035A /* LXKVStorage.m */; };
@@ -35,8 +36,6 @@
 		5A75564ECC7F1315892BBE56 /* libPods-LXCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LXCache.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73083EFB21F02859005047C4 /* LXRuntimeExtensiions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXRuntimeExtensiions.h; sourceTree = "<group>"; };
 		73083EFC21F02859005047C4 /* LXRuntimeExtensiions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXRuntimeExtensiions.m; sourceTree = "<group>"; };
-		73083EFE21F02884005047C4 /* LXConcreteProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXConcreteProtocol.h; sourceTree = "<group>"; };
-		73083EFF21F02884005047C4 /* LXConcreteProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXConcreteProtocol.m; sourceTree = "<group>"; };
 		73083F0121F0B5B2005047C4 /* LXCacheProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXCacheProtocol.h; sourceTree = "<group>"; };
 		73083F0221F0B5B2005047C4 /* LXCacheProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXCacheProtocol.m; sourceTree = "<group>"; };
 		73083F0E21F0C36B005047C4 /* EXTConcreteProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTConcreteProtocol.h; sourceTree = "<group>"; };
@@ -44,6 +43,10 @@
 		73083F1021F0C36B005047C4 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
 		73083F1121F0C36C005047C4 /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; };
 		73083F1221F0C36C005047C4 /* EXTRuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTRuntimeExtensions.m; sourceTree = "<group>"; };
+		73083F1521F0D5E7005047C4 /* NSObject+LXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LXCategory.h"; sourceTree = "<group>"; };
+		73083F1621F0D5E7005047C4 /* NSObject+LXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LXCategory.m"; sourceTree = "<group>"; };
+		73083F1B21F0F7A1005047C4 /* LXProtocolExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXProtocolExtension.h; sourceTree = "<group>"; };
+		73083F1C21F0F7A1005047C4 /* LXProtocolExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXProtocolExtension.m; sourceTree = "<group>"; };
 		73185D1E2195C352005F1B96 /* SubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
 		73185D1F2195C352005F1B96 /* SubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
 		733E893821BEA32100AF035A /* LXCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXCache.h; sourceTree = "<group>"; };
@@ -113,11 +116,13 @@
 				7386F1EC21ECD58D005DDE2E /* LXSafeDictionary.m */,
 				73083F0121F0B5B2005047C4 /* LXCacheProtocol.h */,
 				73083F0221F0B5B2005047C4 /* LXCacheProtocol.m */,
+				73083F1521F0D5E7005047C4 /* NSObject+LXCategory.h */,
+				73083F1621F0D5E7005047C4 /* NSObject+LXCategory.m */,
 				735DDF7721ED683600109787 /* LXCacheDefine.h */,
 				73083EFB21F02859005047C4 /* LXRuntimeExtensiions.h */,
 				73083EFC21F02859005047C4 /* LXRuntimeExtensiions.m */,
-				73083EFE21F02884005047C4 /* LXConcreteProtocol.h */,
-				73083EFF21F02884005047C4 /* LXConcreteProtocol.m */,
+				73083F1B21F0F7A1005047C4 /* LXProtocolExtension.h */,
+				73083F1C21F0F7A1005047C4 /* LXProtocolExtension.m */,
 			);
 			path = LXCache;
 			sourceTree = "<group>";
@@ -277,11 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73083F1D21F0F7A1005047C4 /* LXProtocolExtension.m in Sources */,
 				73546C3121E6CF3C007FA573 /* RHCacheManager.m in Sources */,
 				733E893A21BEA32100AF035A /* LXCache.m in Sources */,
 				7349A811218AF03A0073077B /* ViewController.m in Sources */,
 				7349A81C218AF03B0073077B /* main.m in Sources */,
-				73083F0021F02884005047C4 /* LXConcreteProtocol.m in Sources */,
 				733E894321BEA82F00AF035A /* LXMemoryCache.m in Sources */,
 				73083F1421F0C36C005047C4 /* EXTRuntimeExtensions.m in Sources */,
 				73083F1321F0C36C005047C4 /* EXTConcreteProtocol.m in Sources */,
@@ -290,6 +295,7 @@
 				7386F1ED21ECD58D005DDE2E /* LXSafeDictionary.m in Sources */,
 				73546C3221E6CF3C007FA573 /* RHCache.m in Sources */,
 				733E894021BEA82300AF035A /* LXKVStorage.m in Sources */,
+				73083F1721F0D5E7005047C4 /* NSObject+LXCategory.m in Sources */,
 				733E894621BEA83D00AF035A /* LXDiskCache.m in Sources */,
 				73185D202195C352005F1B96 /* SubViewController.m in Sources */,
 				73083EFD21F02859005047C4 /* LXRuntimeExtensiions.m in Sources */,

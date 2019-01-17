@@ -71,13 +71,13 @@ Class *lx_copyClassListConformingToProtocol (Protocol *protocol, unsigned *count
  */
 BOOL lx_loadSpecialProtocol (Protocol *protocol, void (^injectionBehavior)(Class destinationClass));
 
-void lx_specialProtocolReadyForInjection (Protocol *protocol) ;
+void lx_specialProtocolReadyForInjection (Protocol *protocol);
 
 NSString *lx_stringForTypedBytes (const void *bytes, const char * encoding);
 
 
 
-
+#pragma mark - Runtime -
 
 
 

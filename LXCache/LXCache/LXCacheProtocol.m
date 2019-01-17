@@ -7,16 +7,18 @@
 //
 
 #import "LXCacheProtocol.h"
-
+#import "NSObject+LXCategory.h"
+#import "LXProtocolExtension.h"
 
 #pragma mark - LXSeparateCacheProtocol默认实现  -
-@lx_concreteprotocol(LXSeparateCacheProtocol)
+@protocolExtension(LXSeparateCacheProtocol)
  
 
 @synthesize delegate = _delegate;
 
 
 - (BOOL)removeSeparaAllCache{
+    
     return YES;
 }
 
@@ -25,6 +27,20 @@
 }
 
 - (BOOL)containsObjectForKey:(NSString *)key,...{
+    if(self.separateCache){
+        NSMethodSignature *sig = [self methodSignatureForSelector:_cmd];
+        if (!sig){[self doesNotRecognizeSelector:_cmd]; return NO;}
+        NSInvocation *invoctation = [NSInvocation invocationWithMethodSignature:sig];
+        invoctation.target = self.separateCache;
+        invoctation.selector = _cmd;
+        va_list args;
+        va_start(args, key);
+        [NSObject setInv:invoctation withSig:sig andArgs:args];
+        va_end(args);
+        [invoctation invoke];
+        return [[self getInvocationFromInv:invoctation sig:sig] boolValue];
+    }
+    
     return YES;
 }
 
@@ -95,10 +111,7 @@ isClearWhenTimeOut:(BOOL)isClearWhenTimeOut{
 }
 
 - (CGFloat)cacheSize{
+    
     return 0;
-}
-
-- (id<LXSeparateCacheProtocol>)defaultDeal{
-    return self;
 }
 @end
