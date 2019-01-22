@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "LXCache.h"
 #import "SubViewController.h"
+#import <objc/runtime.h>
+#import "NSObject+LXCategory.h"
 @interface ViewController ()
 
 @end
@@ -18,8 +20,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[LXCache defaultCache].identity(@"mmSay") setob];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self performSelectorWithArguments:@selector(asdkf::),@"aa",4];
+    [self performSelectorWithArguments:@selector(a)];
+    [[LXCache defaultCache] containsObjectForKey:@"11112341234234"];
+    [[LXCache defaultCache].identity(@"11") containsObjectForKey:@"22212341234" moreInfo:^(id<LXCacheObtainProtocol> info) {
+        
+    }];
+
+}
+
+- (void)asdkf:(NSString *)adf :(CGFloat)asdf{
+    NSLog(@"1");
+}
+
+- (void)a{
+    NSLog(@"2");
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

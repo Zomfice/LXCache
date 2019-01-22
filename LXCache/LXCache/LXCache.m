@@ -12,19 +12,13 @@
 #define kLXDefalutCachePath @".kLXDeafultCache"
 #define kLXDefalutIdentify @".kLXDeafultCacheIdentify"
 #pragma mark - _lxKeyObject -
-@interface _lxKeyObject : NSObject<LXKeyCacheProtocol>{
-    @package
-    NSString *_key;
-    NSString * _identity;
-    NSTimeInterval _memoryTime, _diskTime, _saveTime;
-    LXCacheType _cacheType;
-    BOOL _isClearWhenCache;
-}
+
+@interface _lxSetObject : NSObject<LXCacheKeyProtocol>
 
 @end
 
-@implementation _lxKeyObject
-
+@implementation _lxSetObject
+@synthesize cacheType = _cacheType, memoryTime = _memoryTime, diskTime = _diskTime, cacheStatus = _cacheStatus, isClearWhenTimeOut = _isClearWhenTimeOut, key = _key,identify = _identify, saveTime = _saveTime;
 - (instancetype)init
 {
     self = [super init];
@@ -35,92 +29,85 @@
     return self;
 }
 
+
 @end
+
+@interface _lxObtainObject : NSObject<LXCacheObtainProtocol>
+
+@end
+
+@implementation _lxObtainObject
+@synthesize resultStatus = _resultStatus, memoryTime = _memoryTime, diskTime = _diskTime;
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _resultStatus = LXCacheResultNormarl;
+    }
+    return self;
+}
+@end
+
 #pragma mark - LXSeparateCache -
 
-@interface LXSeparateCache : NSObject<LXSeparateCacheProtocol>
 
-- (instancetype)initWithIdentity:(NSString *)identity;
+@interface LXSeparateCache : NSObject<LXCacheSeparateDelegate, LXCacheSeparateProtocol>
+
+@property (nonatomic, copy) NSString * identity;
+
 
 @end
-
 
 @implementation LXSeparateCache
 
-- (BOOL)removeSeparaAllCache{
-    return YES;
-}
-
-- (void)removeSeparaAllCacheWithBlock:(void (^)(BOOL))block{
-    
-}
-
-- (BOOL)containsObjectForKey:(NSString *)key,...{
-    
-}
-
-- (void)containsObjectForKey:(NSString *)key
-                   withBlock:(void (^) (NSString *key, BOOL contains))block,...;
-
-- (void)containsSynObjectForKey:(NSString *)key
-                      withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
-
-- (void)containsAsynObjectDetailForKey:(NSString *)key
-                             withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
-
-- (id <NSCoding>)objectForKey:(NSString *)key,...;
-
-- (void)objectSynForKey:(NSString *)key
-              withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block, ...;
-
-- (void)objectForKey:(NSString *)key
-           withBlock:(void (^) (NSString *key, id <NSCoding>object))block,...;
-
-
-- (void)objectAsynForKey:(NSString *)key
-               withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block,...;
-
-- (BOOL)setObject:(id <NSCoding>)object forKey:(NSString *)key, ...;
-
-- (void)setObject:(id <NSCoding>)object
-           forKey:(NSString *)key
-        withBlock:(void (^) (NSString *key, id <NSCoding>object, BOOL isSuccess))block,...;
-
-- (BOOL)removeObjectForKey:(NSString *)key;
-
-- (void)removeObjectForKey:(NSString *)key
-                 withBlock:(void (^) (NSString *key, id <NSCoding> object))block;
-
-- (void)setDefaultMemoryTime:(NSTimeInterval)memoryTime
-                    diskTime:(NSTimeInterval)diskTime
-          isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
-
-- (void)setSaveMemoryTime:(NSTimeInterval)memoryTime
-                 diskTime:(NSTimeInterval)diskTime
-       isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
-
-- (CGFloat)cacheSize;
-
-- (id<LXSeparateCacheProtocol>)defaultDeal{
+- (instancetype)initWithIdentity:(NSString *)identity{
+    if (self = [super init]) {
+        self.identity = identity;
+        
+    }
     return self;
 }
 
+- (BOOL)containsObjectForKey:(NSString *)key{
+    return [self containsObjectForKey:key moreInfo:^(id<LXCacheObtainProtocol> info) {
+        info.resultStatus = LXCacheResultNormarl;
+    }];
+}
+
+- (BOOL)containsObjectForKey:(NSString *)key moreInfo:(moreObtainInfo)info{
+    LXCacheResultStatus status;
+    if (info) {
+        _lxObtainObject *object = [_lxObtainObject new];
+        info(object);
+        status = object.resultStatus;
+    }else{
+        status = LXCacheResultNormarl;
+    }
+    NSLog(@"%lu", status);
+    if (status == LXCacheResultNever) return NO;
+    return YES;
+}
+
+- (id<LXCacheSeparateProtocol>)separateCache{
+    return self;
+}
 @end
 
-@interface LXCache ()
+@interface LXCache ()<LXCacheSeparateProtocol,LXCacheSeparateDelegate>
 {
     NSString *_userName;
     NSString *_password;
 }
 @property (nonatomic, strong) LXSafeDictionary <NSString *, LXSeparateCache *> * separateMap;
-@property (nonatomic, strong) LXSafeDictionary <NSString *,id <LXKeyCacheProtocol>>* keyMap;
+@property (nonatomic, strong) LXSafeDictionary <NSString *,id <LXCacheKeyProtocol>>* keyMap;
 @property (nonatomic, copy) NSString * path;
-@property (nonatomic, strong) LXSeparateCache * defaultSeparate;
+@property (nonatomic, strong) id <LXCacheSeparateProtocol> defaultSeparate;
 @property (nonatomic, strong) NSArray * blackIdentities;
 @property (nonatomic, strong) NSArray * whiteIdentities;
 @property (nonatomic, strong) LXSqlite * sqlit;
 
 @end
+
 @implementation LXCache
 
 + (LXCache *)defaultCache{
@@ -138,7 +125,7 @@
     if (self = [super init]) {
         self.path = path;
         _sqlit = [[LXSqlite alloc] initWithPath:path];
-        
+        _defaultSeparate = self.identity(kLXDefalutIdentify);
         [self open];
     }
     return self;
@@ -180,8 +167,12 @@
     return _separateMap;
 }
 
+#pragma mark - LXCacheSeparateDelegate -
+
+
+
 #pragma mark - 交互逻辑 -
-- (id<LXSeparateCacheProtocol>  _Nonnull (^)(NSString * _Nonnull))identity{
+- (id<LXCacheSeparateProtocol>  _Nonnull (^)(NSString * _Nonnull))identity{
     __weak typeof(self)weakSelf = self;
     return ^( NSString *identity){
         __strong typeof(weakSelf)self = weakSelf;
@@ -192,6 +183,7 @@
                 separate = self.separateMap[identity];
                 if (!separate) {
                     separate = [[LXSeparateCache alloc] initWithIdentity:identity];
+                    separate.delegate = self;
                     [self.separateMap setValue:separate forKey:identity];
                 }
             }
@@ -201,8 +193,8 @@
 }
 
 
-- (id<LXSeparateCacheProtocol>)defaultDeal{
-    return self.defaultDeal;
+- (id<LXCacheSeparateProtocol>)separateCache{
+    return self.defaultSeparate;
 }
 #pragma mark - 全局处理 -
 
@@ -219,7 +211,6 @@
         }
         return;
     }
-    
     LXSeparateCache *cache = self.separateMap[identity];
     [cache removeSeparaAllCacheWithBlock:block];   
 }

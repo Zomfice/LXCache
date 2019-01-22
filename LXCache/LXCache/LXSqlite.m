@@ -15,5 +15,11 @@
 
 @end
 @implementation LXSqlite
+- (instancetype)initWithPath:(NSString *)path{
+    return [self init];
+}
 
+- (BOOL)open{
+    return YES;
+}
 @end
