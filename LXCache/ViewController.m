@@ -22,25 +22,11 @@
     
     [self performSelectorWithArguments:@selector(asdkf::),@"aa",4];
     [self performSelectorWithArguments:@selector(a)];
-    
-//    BOOL showRequiredMethods = NO;
-//    BOOL showInstanceMethods = YES;
-//
-//    unsigned int methodCount = 0;
-//    struct objc_method_description *methods = protocol_copyMethodDescriptionList(@protocol(LXaaSeparateCacheProtocol) , showRequiredMethods, showInstanceMethods, &methodCount);
-//
-//    NSLog(@"%d required instance methods found:", methodCount);
-//
-//    for (int i = 0; i < methodCount; i++)
-//    {
-//        struct objc_method_description methodDescription = methods[i];
-//        NSLog(@"Method #%d: %@", i, NSStringFromSelector(methodDescription.name));
-//    }
+    [[LXCache defaultCache] containsObjectForKey:@"11112341234234"];
+    [[LXCache defaultCache].identity(@"11") containsObjectForKey:@"22212341234" moreInfo:^(id<LXCacheObtainProtocol> info) {
+        
+    }];
 
-//    free(methods);
-    [[LXCache defaultCache] containsObjectForKey:@"aaaaa1",@"bbbbbb1",@"asdfasdfsd",@"asdfasdfsdf", nil];
-//    [[LXCache defaultCache].identity(@"default") containsObjectForKey:@"aaaaa2",@"bbbbbb2",nil];
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)asdkf:(NSString *)adf :(CGFloat)asdf{

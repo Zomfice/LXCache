@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LXCacheProtocol.h"
-NS_ASSUME_NONNULL_BEGIN
-
-
-@interface LXCache : NSObject<LXSeparateCacheProtocol,LXGlobalCacheProtocol>
+@interface LXCache : NSObject<LXCacheSeparateProtocol,LXGlobalCacheProtocol>
 
 //单例
 + (LXCache *)defaultCache;
@@ -42,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param identity 分区标识
  @return 返回一个可操作的缓存分区
  */
-@property (nonatomic, copy, readonly, nullable) id <LXSeparateCacheProtocol>  (^ identity) (NSString * identity);
+@property (nonatomic, copy, readonly, nullable) id <LXCacheSeparateProtocol>  (^ identity) (NSString * identity);
 
 
 #pragma mark - 移除缓存 -
@@ -97,7 +94,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
-
-
-NS_ASSUME_NONNULL_END

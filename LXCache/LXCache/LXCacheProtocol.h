@@ -6,26 +6,55 @@
 //  Copyright © 2019 xllpp. All rights reserved.
 //
 #import "LXCacheDefine.h"
-NS_ASSUME_NONNULL_BEGIN
-@protocol LXSeparateCacheDelegate <NSObject>
+
+@protocol LXCacheSeparateDelegate <NSObject>
 
 
 @end
 
-@protocol LXKeyCacheProtocol <NSObject>
+/**
+ 是否包含筛选条件
+ */
+@protocol LXCacheObtainProtocol <NSObject>
+
+@property (nonatomic, assign) LXCacheResultStatus resultStatus;
+
+@property (nonatomic, assign) NSTimeInterval memoryTime;
+
+@property (nonatomic, assign) NSTimeInterval diskTime;
+
+@end
+
+@protocol LXCacheKeyProtocol <NSObject>
+
+@property (nonatomic, assign) LXCacheType cacheType;
+
+@property (nonatomic, assign) NSTimeInterval memoryTime;
+
+@property (nonatomic, assign) NSTimeInterval diskTime;
+
+@property (nonatomic, assign) LXCacheResultStatus cacheStatus;
+
+@property (nonatomic, assign) BOOL isClearWhenTimeOut;
 
 @property (nonatomic, copy) NSString * key;
+
 @property (nonatomic, copy) NSString * identify;
 
+@property (nonatomic, assign) NSTimeInterval saveTime;
+
 @end
-#pragma mark - LXSeparateCacheProtocol  -
-@protocol LXSeparateCacheProtocol <NSObject>
+
+typedef void(^ moreSetInfo)(id <LXCacheKeyProtocol> info);
+typedef void(^ moreObtainInfo)(id <LXCacheObtainProtocol> info);
+#pragma mark - LXCacheSeparateProtocol  -
+@protocol LXCacheSeparateProtocol <NSObject>
 
 @optional
 
-@property (nonatomic, weak) id <LXSeparateCacheDelegate> delegate;
+@property (nonatomic, weak) id <LXCacheSeparateDelegate> delegate;
 
-- (id <LXSeparateCacheProtocol>) separateCache;
+- (id <LXCacheSeparateProtocol>) separateCache;
 
 /**
  清除表
@@ -44,17 +73,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param key 键值
  */
 
-- (BOOL)containsObjectForKey:(NSString *)key,...;
+- (BOOL)containsObjectForKey:(NSString *)key;
 
-/**
- 
- 异步判断否包含存储对象  ... : 传入查询状态，LXCacheResultStatus
- 
- @param key 键值
- @param block block回调
- */
-- (void)containsObjectForKey:(NSString *)key
-                   withBlock:(void (^) (NSString *key, BOOL contains))block,...;
+- (BOOL)containsObjectForKey:(NSString *)key moreInfo:(moreObtainInfo)info;
 
 /**
  同步判断否包含存储对象  ... : 传入查询状态，LXCacheResultStatus
@@ -63,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param block block回调
  */
 - (void)containsSynObjectForKey:(NSString *)key
-                      withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
+                      withBlock:(void (^) (BOOL contains, id <LXCacheKeyProtocol> info))block;
 
 /**
  异步判断否包含存储对象  ... : 传入查询状态，LXCacheResultStatus
@@ -72,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param block block回调
  */
 - (void)containsAsynObjectDetailForKey:(NSString *)key
-                             withBlock:(void (^) (BOOL contains, id <LXKeyCacheProtocol> info))block,...;
+                             withBlock:(void (^) (BOOL contains, id <LXCacheKeyProtocol> info))block;
 
 /**
  同步获取存储对象  ... : 传入查询状态，LXCacheResultStatus
@@ -81,22 +102,16 @@ NS_ASSUME_NONNULL_BEGIN
  @return 存储对象
  
  */
-- (id <NSCoding>)objectForKey:(NSString *)key,...;
+- (id <NSCoding>)objectForKey:(NSString *)key;
+
+- (id <NSCoding>)objectForKey:(NSString *)key moreInfo:(moreObtainInfo)moreInfo;
 
 - (void)objectSynForKey:(NSString *)key
-              withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block, ...;
-/**
- 异步获取存储对象 ... : 传入查询状态，LXCacheResultStatus
- 
- @param key 键值
- @param block 回调
- */
-- (void)objectForKey:(NSString *)key
-           withBlock:(void (^) (NSString *key, id <NSCoding>object))block,...;
+              withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXCacheKeyProtocol> info))block;
 
 
 - (void)objectAsynForKey:(NSString *)key
-               withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXKeyCacheProtocol> info))block,...;
+               withBlock:(void (^) (NSString *key, id <NSCoding>object, id <LXCacheKeyProtocol> info))block;
 /**
  缓存设置，设置完key后可设置：...:分别传入缓存类型、内存缓存时间、磁盘缓存时间、是否过期清空
  
@@ -104,7 +119,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param key 键值
  
  */
-- (BOOL)setObject:(id <NSCoding>)object forKey:(NSString *)key, ...;
+- (BOOL)setObject:(id <NSCoding>)object forKey:(NSString *)key;
+
+- (BOOL)setObject:(id <NSCoding>)object forKey:(NSString *)key moreInfo:(moreSetInfo)info;
 
 /**
  异步缓存  ... : 传入查询状态，LXCacheResultStatus
@@ -115,7 +132,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setObject:(id <NSCoding>)object
            forKey:(NSString *)key
-        withBlock:(void (^) (NSString *key, id <NSCoding>object, BOOL isSuccess))block,...;
+        withBlock:(void (^) (NSString *key, id <NSCoding>object, BOOL isSuccess))block;
+
+- (void)setObject:(id <NSCoding>)object
+         moreInfo:(moreSetInfo)info
+           forKey:(NSString *)key
+        withBlock:(void (^) (NSString *key, id <NSCoding>object, BOOL isSuccess))block;
 
 
 /**
@@ -137,23 +159,17 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param memoryTime 内存缓存时间
  @param diskTime 磁盘缓存时间
- @param isClearWhenTimeOut 是否过期清除
  */
 - (void)setDefaultMemoryTime:(NSTimeInterval)memoryTime
                     diskTime:(NSTimeInterval)diskTime
           isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
 
-
 /**
- 设置缓存实例默认缓存时间属性
- 
- @param memoryTime 内存缓存时间
+ 多长时间未使用后删除
  @param diskTime 磁盘缓存时间
- @param isClearWhenTimeOut 是否过期清除
  */
-- (void)setSaveMemoryTime:(NSTimeInterval)memoryTime
-                 diskTime:(NSTimeInterval)diskTime
-       isClearWhenTimeOut:(BOOL)isClearWhenTimeOut;
+- (void)setUseDiskTime:(NSTimeInterval)diskTime;
+
 /**
  缓存大小
  */
@@ -177,7 +193,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param block 回调
  */
 - (void)containSynObjectsForKey:(NSString *)key
-                      withBlock:(void (^ ) (NSArray <id <LXKeyCacheProtocol>> *objects))block,...;
+                      withBlock:(void (^ ) (NSArray <id <LXCacheKeyProtocol>> *objects))block;
 /**
  异步查询整个数据库缓存,传入查询匹配结果状态
  
@@ -185,19 +201,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param block 回调
  */
 - (void)containAsynObjectsForKey:(NSString *)key
-                       withBlock:(void (^ ) (NSArray <id <LXKeyCacheProtocol>> *objects))block,...;
+                       withBlock:(void (^ ) (NSArray <id <LXCacheKeyProtocol>> *objects))block;
 
 
 
 @end
-
-
-@protocol LXaaSeparateCacheProtocol <NSObject>
-
-- (void)aa;
-
-- (void)asdfasdfasdfasdfasdf;
-
-- (void)asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf;
-@end
-NS_ASSUME_NONNULL_END

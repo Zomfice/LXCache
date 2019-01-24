@@ -12,19 +12,13 @@
 #define kLXDefalutCachePath @".kLXDeafultCache"
 #define kLXDefalutIdentify @".kLXDeafultCacheIdentify"
 #pragma mark - _lxKeyObject -
-@interface _lxKeyObject : NSObject<LXKeyCacheProtocol>{
-    @package
-    NSString *_key;
-    NSString * _identity;
-    NSTimeInterval _memoryTime, _diskTime, _saveTime;
-    LXCacheType _cacheType;
-    BOOL _isClearWhenCache;
-}
+
+@interface _lxSetObject : NSObject<LXCacheKeyProtocol>
 
 @end
 
-@implementation _lxKeyObject
-
+@implementation _lxSetObject
+@synthesize cacheType = _cacheType, memoryTime = _memoryTime, diskTime = _diskTime, cacheStatus = _cacheStatus, isClearWhenTimeOut = _isClearWhenTimeOut, key = _key,identify = _identify, saveTime = _saveTime;
 - (instancetype)init
 {
     self = [super init];
@@ -35,60 +29,85 @@
     return self;
 }
 
+
 @end
+
+@interface _lxObtainObject : NSObject<LXCacheObtainProtocol>
+
+@end
+
+@implementation _lxObtainObject
+@synthesize resultStatus = _resultStatus, memoryTime = _memoryTime, diskTime = _diskTime;
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _resultStatus = LXCacheResultNormarl;
+    }
+    return self;
+}
+@end
+
 #pragma mark - LXSeparateCache -
 
 
-@interface LXSeparateCache : NSObject<LXSeparateCacheDelegate, LXSeparateCacheProtocol>
+@interface LXSeparateCache : NSObject<LXCacheSeparateDelegate, LXCacheSeparateProtocol>
+
+@property (nonatomic, copy) NSString * identity;
+
 
 @end
 
 @implementation LXSeparateCache
 
-//@synthesize delegate = _delegate;
-
 - (instancetype)initWithIdentity:(NSString *)identity{
-    
-    return [self init];
+    if (self = [super init]) {
+        self.identity = identity;
+        
+    }
+    return self;
 }
 
-void va_loopTimes(va_list list, NSUInteger count, ^()(va_list list, NSUInteger index){
-    
-})
+- (BOOL)containsObjectForKey:(NSString *)key{
+    return [self containsObjectForKey:key moreInfo:^(id<LXCacheObtainProtocol> info) {
+        info.resultStatus = LXCacheResultNormarl;
+    }];
+}
 
-
-- (BOOL)containsObjectForKey:(NSString *)key, ... {
-    
-    va_list aa;
-    va_start(aa, key);
-    va_list bb = va_arg(aa, va_list);
-    for (NSString *str = key; str != nil; str = va_arg(bb, NSString*)) {
-        NSLog(@"%@",str);
+- (BOOL)containsObjectForKey:(NSString *)key moreInfo:(moreObtainInfo)info{
+    LXCacheResultStatus status;
+    if (info) {
+        _lxObtainObject *object = [_lxObtainObject new];
+        info(object);
+        status = object.resultStatus;
+    }else{
+        status = LXCacheResultNormarl;
     }
-    va_end(bb);
-    va_end(aa);
+    NSLog(@"%lu", status);
+    if (status == LXCacheResultNever) return NO;
     return YES;
 }
 
-- (id<LXSeparateCacheProtocol>)separateCache{
+- (id<LXCacheSeparateProtocol>)separateCache{
     return self;
 }
 @end
 
-@interface LXCache ()<LXSeparateCacheProtocol,LXSeparateCacheDelegate>
+@interface LXCache ()<LXCacheSeparateProtocol,LXCacheSeparateDelegate>
 {
     NSString *_userName;
     NSString *_password;
 }
 @property (nonatomic, strong) LXSafeDictionary <NSString *, LXSeparateCache *> * separateMap;
-@property (nonatomic, strong) LXSafeDictionary <NSString *,id <LXKeyCacheProtocol>>* keyMap;
+@property (nonatomic, strong) LXSafeDictionary <NSString *,id <LXCacheKeyProtocol>>* keyMap;
 @property (nonatomic, copy) NSString * path;
-@property (nonatomic, strong) id <LXSeparateCacheProtocol> defaultSeparate;
+@property (nonatomic, strong) id <LXCacheSeparateProtocol> defaultSeparate;
 @property (nonatomic, strong) NSArray * blackIdentities;
 @property (nonatomic, strong) NSArray * whiteIdentities;
 @property (nonatomic, strong) LXSqlite * sqlit;
 
 @end
+
 @implementation LXCache
 
 + (LXCache *)defaultCache{
@@ -148,12 +167,12 @@ void va_loopTimes(va_list list, NSUInteger count, ^()(va_list list, NSUInteger i
     return _separateMap;
 }
 
-#pragma mark - LXSeparateCacheDelegate -
+#pragma mark - LXCacheSeparateDelegate -
 
 
 
 #pragma mark - 交互逻辑 -
-- (id<LXSeparateCacheProtocol>  _Nonnull (^)(NSString * _Nonnull))identity{
+- (id<LXCacheSeparateProtocol>  _Nonnull (^)(NSString * _Nonnull))identity{
     __weak typeof(self)weakSelf = self;
     return ^( NSString *identity){
         __strong typeof(weakSelf)self = weakSelf;
@@ -174,7 +193,7 @@ void va_loopTimes(va_list list, NSUInteger count, ^()(va_list list, NSUInteger i
 }
 
 
-- (id<LXSeparateCacheProtocol>)separateCache{
+- (id<LXCacheSeparateProtocol>)separateCache{
     return self.defaultSeparate;
 }
 #pragma mark - 全局处理 -
@@ -192,7 +211,6 @@ void va_loopTimes(va_list list, NSUInteger count, ^()(va_list list, NSUInteger i
         }
         return;
     }
-    
     LXSeparateCache *cache = self.separateMap[identity];
     [cache removeSeparaAllCacheWithBlock:block];   
 }
