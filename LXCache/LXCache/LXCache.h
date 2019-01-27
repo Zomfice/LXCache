@@ -20,6 +20,7 @@
  */
 - (LXCache *)initWithPath:(NSString *)path;
 
+- (LXCache *)initWithCachePatch:(NSString *)path;
 /**
  通过账号密码进入数据库
  如果没有设置，则为创建账号密码

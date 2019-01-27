@@ -9,17 +9,32 @@
 #import "LXSqlite.h"
 #import <sqlite3.h>
 
+
+
 @interface LXSqlite (){
     sqlite3 *_db;
+    NSString *_path;
+    dispatch_semaphore_t _lock;
 }
 
 @end
+
 @implementation LXSqlite
 - (instancetype)initWithPath:(NSString *)path{
-    return [self init];
+    if (self = [super init]) {
+        _path = path;
+        _lock = dispatch_semaphore_create(1);
+    }
+    return self;
 }
 
-- (BOOL)open{
-    return YES;
+- (void)lock{
+    dispatch_semaphore_wait(_lock, DISPATCH_TIME_FOREVER);
 }
+
+- (void)unlock{
+    dispatch_semaphore_signal(_lock);
+}
+
+
 @end

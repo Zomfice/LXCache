@@ -168,7 +168,8 @@ typedef void(^ moreObtainInfo)(id <LXCacheObtainProtocol> info);
  多长时间未使用后删除
  @param diskTime 磁盘缓存时间
  */
-- (void)setUseDiskTime:(NSTimeInterval)diskTime;
+- (void)setUseDiskTime:(NSTimeInterval)diskTime
+            memoryTime:(NSTimeInterval)memroyTime;
 
 /**
  缓存大小

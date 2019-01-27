@@ -7,106 +7,55 @@
 //
 
 #import "LXCache.h"
-#import "LXSafeDictionary.h"
-#import "LXSqlite.h"
+#import "LXSeparateCache.h"
+#import "LXMemoryCache.h"
 #define kLXDefalutCachePath @".kLXDeafultCache"
 #define kLXDefalutIdentify @".kLXDeafultCacheIdentify"
-#pragma mark - _lxKeyObject -
 
-@interface _lxSetObject : NSObject<LXCacheKeyProtocol>
+static NSMapTable *_lxcaheGlobalObjects;
 
-@end
-
-@implementation _lxSetObject
-@synthesize cacheType = _cacheType, memoryTime = _memoryTime, diskTime = _diskTime, cacheStatus = _cacheStatus, isClearWhenTimeOut = _isClearWhenTimeOut, key = _key,identify = _identify, saveTime = _saveTime;
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _memoryTime = -1;
-        _diskTime = -1;
-    }
-    return self;
-}
+static dispatch_semaphore_t _lxcaheGlobalLock;
 
 
-@end
 
-@interface _lxObtainObject : NSObject<LXCacheObtainProtocol>
-
-@end
-
-@implementation _lxObtainObject
-@synthesize resultStatus = _resultStatus, memoryTime = _memoryTime, diskTime = _diskTime;
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _resultStatus = LXCacheResultNormarl;
-    }
-    return self;
-}
-@end
-
-#pragma mark - LXSeparateCache -
-
-
-@interface LXSeparateCache : NSObject<LXCacheSeparateDelegate, LXCacheSeparateProtocol>
-
-@property (nonatomic, copy) NSString * identity;
-
-
-@end
-
-@implementation LXSeparateCache
-
-- (instancetype)initWithIdentity:(NSString *)identity{
-    if (self = [super init]) {
-        self.identity = identity;
-        
-    }
-    return self;
-}
-
-- (BOOL)containsObjectForKey:(NSString *)key{
-    return [self containsObjectForKey:key moreInfo:^(id<LXCacheObtainProtocol> info) {
-        info.resultStatus = LXCacheResultNormarl;
-    }];
-}
-
-- (BOOL)containsObjectForKey:(NSString *)key moreInfo:(moreObtainInfo)info{
-    LXCacheResultStatus status;
-    if (info) {
-        _lxObtainObject *object = [_lxObtainObject new];
-        info(object);
-        status = object.resultStatus;
-    }else{
-        status = LXCacheResultNormarl;
-    }
-    NSLog(@"%lu", status);
-    if (status == LXCacheResultNever) return NO;
-    return YES;
-}
-
-- (id<LXCacheSeparateProtocol>)separateCache{
-    return self;
-}
-@end
-
-@interface LXCache ()<LXCacheSeparateProtocol,LXCacheSeparateDelegate>
+@interface LXCache ()<LXCacheSeparateDelegate>
 {
     NSString *_userName;
     NSString *_password;
+    dispatch_semaphore_t _lock;
 }
-@property (nonatomic, strong) LXSafeDictionary <NSString *, LXSeparateCache *> * separateMap;
-@property (nonatomic, strong) LXSafeDictionary <NSString *,id <LXCacheKeyProtocol>>* keyMap;
+@property (nonatomic, strong) NSMutableDictionary <NSString *, id <LXCacheSeparateProtocol> > * separateMap;
+@property (nonatomic, strong) LXMemoryCache * keyMap;
 @property (nonatomic, copy) NSString * path;
 @property (nonatomic, strong) id <LXCacheSeparateProtocol> defaultSeparate;
 @property (nonatomic, strong) NSArray * blackIdentities;
 @property (nonatomic, strong) NSArray * whiteIdentities;
-@property (nonatomic, strong) LXSqlite * sqlit;
+@property (nonatomic, strong) LXSqlite * sqlite;
 
 @end
+static void _LXCacheCacheInitGlobal(void) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _lxcaheGlobalLock = dispatch_semaphore_create(1);
+        _lxcaheGlobalObjects = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory capacity:0];
+    });
+}
+void _lxSetCacheObject(LXCache *cache){
+    if (cache.path.length == 0) return;
+    _LXCacheCacheInitGlobal();
+    dispatch_semaphore_wait(_lxcaheGlobalLock, DISPATCH_TIME_FOREVER);
+    [_lxcaheGlobalObjects setObject:cache forKey:cache.path];
+    dispatch_semaphore_signal(_lxcaheGlobalLock);
+}
+
+LXCache* _lxGetCacheObject(NSString *path){
+    if (path.length == 0) return nil;
+    _LXCacheCacheInitGlobal();
+    dispatch_semaphore_wait(_lxcaheGlobalLock, DISPATCH_TIME_FOREVER);
+    id cache = [_lxcaheGlobalObjects objectForKey:path];
+    dispatch_semaphore_signal(_lxcaheGlobalLock);
+    return cache;
+}
 
 @implementation LXCache
 
@@ -122,69 +71,62 @@
 }
 
 - (instancetype)initWithPath:(NSString *)path{
+    id cache = _lxGetCacheObject(path);
+    if (cache) {
+        return cache;
+    }
     if (self = [super init]) {
-        self.path = path;
-        _sqlit = [[LXSqlite alloc] initWithPath:path];
+        _path = path;
+        _lock = dispatch_semaphore_create(1);
+        _sqlite = [[LXSqlite alloc] initWithPath:path];
         _defaultSeparate = self.identity(kLXDefalutIdentify);
-        [self open];
+        _lxSetCacheObject(self);
     }
     return self;
 }
 #pragma mark - 设置密码 -
 - (void)openWithUserName:(NSString *)userName password:(NSString *)password{
-    _userName = userName;
-    _password = password;
-    [_sqlit setUserName:userName password:password];
-    [self open];
+    [_sqlite openUserName:userName password:password];
 }
 
 - (void)updatePassword:(NSString *)password{
-    if (_userName.length == 0) return;
-    if ([self.sqlit updateUserName:_userName password:password]){
-        _password = password;
-    }
+    [_sqlite updatePassword:password];
 }
 
-#pragma mark - 打开 -
-- (void)open{
-    if ([_sqlit open]) {
-        [self loadData];
-    }
-}
-
-- (void)loadData{
-    
-}
-
-#pragma mark - 数据处理 -
-
-
-
-- (LXSafeDictionary<NSString *,LXSeparateCache *> *)separateMap{
+- (NSMutableDictionary<NSString *,id<LXCacheSeparateProtocol>> *)separateMap{
     if (!_separateMap) {
-        _separateMap = [LXSafeDictionary dictionary];
+        _separateMap = [NSMutableDictionary dictionary];
     }
     return _separateMap;
 }
 
+- (void)lock{
+    dispatch_semaphore_wait(_lock, DISPATCH_TIME_FOREVER);
+}
+
+- (void)unlock{
+    dispatch_semaphore_signal(_lock);
+}
 #pragma mark - LXCacheSeparateDelegate -
 
 
 
 #pragma mark - 交互逻辑 -
 - (id<LXCacheSeparateProtocol>  _Nonnull (^)(NSString * _Nonnull))identity{
-    __weak typeof(self)weakSelf = self;
     return ^( NSString *identity){
-        __strong typeof(weakSelf)self = weakSelf;
-        LXSeparateCache *separate;
+        id <LXCacheSeparateProtocol> separate;
         if (!self) return separate;
         if ([identity isKindOfClass:[NSString class]]) {
             if (identity.length > 0) {
+                [self lock];
                 separate = self.separateMap[identity];
+                [self unlock];
                 if (!separate) {
-                    separate = [[LXSeparateCache alloc] initWithIdentity:identity];
+                    separate = (id <LXCacheSeparateProtocol>)[[LXSeparateCache alloc] initWithIdentity:identity sqlite:self.sqlite];
                     separate.delegate = self;
+                    [self lock];
                     [self.separateMap setValue:separate forKey:identity];
+                    [self unlock];
                 }
             }
         }
@@ -200,7 +142,7 @@
 
 - (BOOL)removeSeparaCacheWithIdentity:(NSString *)identity{
     if (identity.length == 0) return YES;
-    LXSeparateCache *cache = self.separateMap[identity];
+    id <LXCacheSeparateProtocol> cache = self.separateMap[identity];
     return [cache removeSeparaAllCache];
 }
 
@@ -211,7 +153,7 @@
         }
         return;
     }
-    LXSeparateCache *cache = self.separateMap[identity];
+    id <LXCacheSeparateProtocol> cache = self.separateMap[identity];
     [cache removeSeparaAllCacheWithBlock:block];   
 }
 
