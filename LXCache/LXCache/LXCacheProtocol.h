@@ -7,14 +7,21 @@
 //
 #import "LXCacheDefine.h"
 
+#pragma mark - LXCacheSeparateDelegate -
+
+
 @protocol LXCacheSeparateDelegate <NSObject>
 
 
 @end
 
+
+#pragma mark - LXCacheObtainProtocol -
 /**
  是否包含筛选条件
  */
+
+
 @protocol LXCacheObtainProtocol <NSObject>
 
 @property (nonatomic, assign) LXCacheResultStatus resultStatus;
@@ -24,6 +31,10 @@
 @property (nonatomic, assign) NSTimeInterval diskTime;
 
 @end
+
+
+#pragma mark - LXCacheKeyProtocol -
+
 
 @protocol LXCacheKeyProtocol <NSObject>
 
@@ -45,17 +56,8 @@
 
 @end
 
-typedef void(^ moreSetInfo)(id <LXCacheKeyProtocol> info);
-typedef void(^ moreObtainInfo)(id <LXCacheObtainProtocol> info);
-#pragma mark - LXCacheSeparateProtocol  -
-@protocol LXCacheSeparateProtocol <NSObject>
-
-@optional
-
-@property (nonatomic, weak) id <LXCacheSeparateDelegate> delegate;
-
-- (id <LXCacheSeparateProtocol>) separateCache;
-
+#pragma mark - LXCacheProtocol -
+@protocol LXCacheProtocol <NSObject>
 /**
  清除表
  */
@@ -67,6 +69,26 @@ typedef void(^ moreObtainInfo)(id <LXCacheObtainProtocol> info);
  @param block 回调
  */
 - (void)removeSeparaAllCacheWithBlock:(void (^) (BOOL success))block;
+
+@end
+
+#pragma mark - LXCacheSeparateProtocol  -
+
+
+typedef void(^ moreSetInfo)(id <LXCacheKeyProtocol> info);
+typedef void(^ moreObtainInfo)(id <LXCacheObtainProtocol> info);
+
+@protocol LXCacheSeparateProtocol <LXCacheProtocol>
+
+@optional
+
+@property (nonatomic, weak) id <LXCacheSeparateDelegate> delegate;
+
+- (id <LXCacheSeparateProtocol>) separateCache;
+
+
+
+
 /**
  同步判断否包含存储对象
  
@@ -178,15 +200,15 @@ typedef void(^ moreObtainInfo)(id <LXCacheObtainProtocol> info);
 
 
 @end
-@interface LXCacheProtocol : NSObject
 
-@end
+#pragma mark - LXGlobalCacheProtocol -
+
 
 /**
  全局查询协议
  */
 @protocol LXGlobalCacheProtocol <NSObject>
-
+@optional
 /**
  同步查询整个数据库缓存,传入查询匹配结果状态
  
@@ -203,7 +225,5 @@ typedef void(^ moreObtainInfo)(id <LXCacheObtainProtocol> info);
  */
 - (void)containAsynObjectsForKey:(NSString *)key
                        withBlock:(void (^ ) (NSArray <id <LXCacheKeyProtocol>> *objects))block;
-
-
 
 @end

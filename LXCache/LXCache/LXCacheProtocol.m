@@ -32,6 +32,7 @@ __VA_ARGS__;
 }
 
 - (BOOL)containsObjectForKey:(NSString *)key moreInfo:(moreObtainInfo)info{
+    
     LXMethodInstall(NO,return [self.separateCache containsObjectForKey:key moreInfo:info])
 }
 
@@ -99,8 +100,8 @@ isClearWhenTimeOut:(BOOL)isClearWhenTimeOut{
     LXMethodInstall(,[self.separateCache setDefaultMemoryTime:memoryTime diskTime:diskTime isClearWhenTimeOut:isClearWhenTimeOut])
 }
 
-- (void)setUseDiskTime:(NSTimeInterval)diskTime{
-    LXMethodInstall(,[self.separateCache setUseDiskTime:diskTime]);
+- (void)setUseDiskTime:(NSTimeInterval)diskTime memoryTime:(NSTimeInterval)memroyTime{
+    LXMethodInstall(,[self.separateCache setUseDiskTime:diskTime memoryTime:memroyTime]);
 }
 
 - (CGFloat)cacheSize{

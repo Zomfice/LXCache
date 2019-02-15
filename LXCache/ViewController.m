@@ -11,6 +11,7 @@
 #import "SubViewController.h"
 #import <objc/runtime.h>
 #import "NSObject+LXCategory.h"
+#import <time.h>
 @interface ViewController ()
 
 @end
@@ -20,12 +21,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self performSelectorWithArguments:@selector(asdkf::),@"aa",4];
-    [self performSelectorWithArguments:@selector(a)];
-    [[LXCache defaultCache] containsObjectForKey:@"11112341234234"];
-    [[LXCache defaultCache].identity(@"11") containsObjectForKey:@"22212341234" moreInfo:^(id<LXCacheObtainProtocol> info) {
-        
-    }];
+//    [self performSelectorWithArguments:@selector(asdkf::),@"aa",4];
+//    [self performSelectorWithArguments:@selector(a)];
+//    [[LXCache defaultCache] containsObjectForKey:@"11112341234234"];
+    __block  NSDate *timeNow = [NSDate date];
+    __block int count = 0;
+    for (int i = 0; i < 10000; i++) {
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [LXCache defaultCache].identity(@"11");
+            count++;
+            NSLog(@"耗时：：：：：%f  次数：：：：：%d",[[NSDate date] timeIntervalSinceDate:timeNow],count);
+//        });
+    }
+    
 
 }
 

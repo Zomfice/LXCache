@@ -7,7 +7,8 @@
 //
 
 #import "LXSeparateCache.h"
-
+#import "LXDiskCache.h"
+#import "LXMemoryCache.h"
 
 @interface LXSeparateSetObject : NSObject<LXCacheKeyProtocol>
 
@@ -71,6 +72,7 @@
 }
 
 - (BOOL)containsObjectForKey:(NSString *)key moreInfo:(moreObtainInfo)info{
+    NSLog(@"11111");
     LXCacheResultStatus status;
     if (info) {
         LXSeparateObtainObject *object = [LXSeparateObtainObject new];

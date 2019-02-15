@@ -13,6 +13,7 @@
 		73083F1421F0C36C005047C4 /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1221F0C36C005047C4 /* EXTRuntimeExtensions.m */; };
 		73083F1721F0D5E7005047C4 /* NSObject+LXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1621F0D5E7005047C4 /* NSObject+LXCategory.m */; };
 		73083F1D21F0F7A1005047C4 /* LXProtocolExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1C21F0F7A1005047C4 /* LXProtocolExtension.m */; };
+		73104B5922156BDA002DB597 /* LXDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 73104B5822156BDA002DB597 /* LXDiskCache.m */; };
 		73185D202195C352005F1B96 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73185D1F2195C352005F1B96 /* SubViewController.m */; };
 		731FC06D21FD999F00E596E9 /* LXSeparateCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 731FC06C21FD999F00E596E9 /* LXSeparateCache.m */; };
 		733E893A21BEA32100AF035A /* LXCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893921BEA32100AF035A /* LXCache.m */; };
@@ -46,6 +47,8 @@
 		73083F1621F0D5E7005047C4 /* NSObject+LXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LXCategory.m"; sourceTree = "<group>"; };
 		73083F1B21F0F7A1005047C4 /* LXProtocolExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXProtocolExtension.h; sourceTree = "<group>"; };
 		73083F1C21F0F7A1005047C4 /* LXProtocolExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXProtocolExtension.m; sourceTree = "<group>"; };
+		73104B5722156BDA002DB597 /* LXDiskCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXDiskCache.h; sourceTree = "<group>"; };
+		73104B5822156BDA002DB597 /* LXDiskCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXDiskCache.m; sourceTree = "<group>"; };
 		73185D1E2195C352005F1B96 /* SubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
 		73185D1F2195C352005F1B96 /* SubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
 		731FC06B21FD999F00E596E9 /* LXSeparateCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSeparateCache.h; sourceTree = "<group>"; };
@@ -105,6 +108,8 @@
 				731FC06C21FD999F00E596E9 /* LXSeparateCache.m */,
 				733E894121BEA82F00AF035A /* LXMemoryCache.h */,
 				733E894221BEA82F00AF035A /* LXMemoryCache.m */,
+				73104B5722156BDA002DB597 /* LXDiskCache.h */,
+				73104B5822156BDA002DB597 /* LXDiskCache.m */,
 				73402E0721BFA9C30090CBC7 /* LXSqlite.h */,
 				73402E0821BFA9C30090CBC7 /* LXSqlite.m */,
 				7386F1EB21ECD58D005DDE2E /* LXSafeDictionary.h */,
@@ -196,6 +201,8 @@
 				7349A805218AF03A0073077B /* Sources */,
 				7349A806218AF03A0073077B /* Frameworks */,
 				7349A807218AF03A0073077B /* Resources */,
+				AE8C5E9DDC2B7CDD2F27597E /* [CP] Embed Pods Frameworks */,
+				DEA15CDC0F435B3DAA546D27 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,6 +277,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AE8C5E9DDC2B7CDD2F27597E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LXCache/Pods-LXCache-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEA15CDC0F435B3DAA546D27 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LXCache/Pods-LXCache-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -292,6 +329,7 @@
 				73546C3221E6CF3C007FA573 /* RHCache.m in Sources */,
 				73083F1721F0D5E7005047C4 /* NSObject+LXCategory.m in Sources */,
 				73185D202195C352005F1B96 /* SubViewController.m in Sources */,
+				73104B5922156BDA002DB597 /* LXDiskCache.m in Sources */,
 				73083EFD21F02859005047C4 /* LXRuntimeExtensiions.m in Sources */,
 				73402E0921BFA9C30090CBC7 /* LXSqlite.m in Sources */,
 			);

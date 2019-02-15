@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LXSqlite.h"
-NS_ASSUME_NONNULL_BEGIN
 
+NS_ASSUME_NONNULL_BEGIN
+@class LXSqlite;
+@protocol LXCacheSeparateDelegate;
 @interface LXSeparateCache : NSObject
 - (instancetype)initWithIdentity:(NSString *)identity sqlite:(LXSqlite *)sqlite;
 @property (nonatomic, weak) id <LXCacheSeparateDelegate> delegate;

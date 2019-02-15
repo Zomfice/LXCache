@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B0FD94B4771274820107F73473190B0"
+               BlueprintIdentifier = "3F1A507DD777DAA118670F013E61646A"
                BlueprintName = "Pods-LXCache"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libPods-LXCache.a">

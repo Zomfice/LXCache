@@ -1,16 +1,27 @@
 PODS:
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - SQLiteRepairKit (1.2.1):
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDB (1.0.7.5):
+    - SQLiteRepairKit (~> 1.2.0)
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDBOptimizedSQLCipher (1.2.1)
   - YYCache (1.0.4)
 
 DEPENDENCIES:
+  - FMDB
+  - WCDB
   - YYCache
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - YYCache
-
 SPEC CHECKSUMS:
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  SQLiteRepairKit: 4d21bab9eff6a273f63da6815a0d1659e53f5bde
+  WCDB: 8e90babdeb7784c569353a4bd22a66c0a175a882
+  WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 42a543a76721f48fea1a71a9fe2c7852ed45af97
+PODFILE CHECKSUM: 2c83be53796306308c685b857d7b3b9f690fb2cd
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0

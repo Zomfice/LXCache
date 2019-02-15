@@ -8,7 +8,7 @@
 
 #import "LXCache.h"
 #import "LXSeparateCache.h"
-#import "LXMemoryCache.h"
+#import "LXSqlite.h"
 #define kLXDefalutCachePath @".kLXDeafultCache"
 #define kLXDefalutIdentify @".kLXDeafultCacheIdentify"
 
@@ -25,7 +25,6 @@ static dispatch_semaphore_t _lxcaheGlobalLock;
     dispatch_semaphore_t _lock;
 }
 @property (nonatomic, strong) NSMutableDictionary <NSString *, id <LXCacheSeparateProtocol> > * separateMap;
-@property (nonatomic, strong) LXMemoryCache * keyMap;
 @property (nonatomic, copy) NSString * path;
 @property (nonatomic, strong) id <LXCacheSeparateProtocol> defaultSeparate;
 @property (nonatomic, strong) NSArray * blackIdentities;

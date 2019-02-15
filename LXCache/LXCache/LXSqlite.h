@@ -11,15 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 @class LXSqlite;
 
-
 @interface LXSqlite : NSObject
 
 //设置地址
 - (instancetype)initWithPath:(NSString *)path;
-
-- (void)lock;
-
-- (void)unlock;
 
 //设置账号密码
 - (void)openUserName:(NSString *)userName password:(NSString *)password;
@@ -38,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (int)getTotalItemSizeWithTable:(NSString *)tableName;
 
+/**
+ 获取数据库总大小
+ */
 - (int)getTotalSize;
 /**
  获取表中一个键值的总个数
