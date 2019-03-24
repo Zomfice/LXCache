@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73083EFD21F02859005047C4 /* LXRuntimeExtensiions.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083EFC21F02859005047C4 /* LXRuntimeExtensiions.m */; };
+		73083F0321F0B5B2005047C4 /* LXCacheProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F0221F0B5B2005047C4 /* LXCacheProtocol.m */; };
+		73083F1321F0C36C005047C4 /* EXTConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F0F21F0C36B005047C4 /* EXTConcreteProtocol.m */; };
+		73083F1421F0C36C005047C4 /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1221F0C36C005047C4 /* EXTRuntimeExtensions.m */; };
+		73083F1721F0D5E7005047C4 /* NSObject+LXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1621F0D5E7005047C4 /* NSObject+LXCategory.m */; };
+		73083F1D21F0F7A1005047C4 /* LXProtocolExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 73083F1C21F0F7A1005047C4 /* LXProtocolExtension.m */; };
+		73104B5922156BDA002DB597 /* LXDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 73104B5822156BDA002DB597 /* LXDiskCache.m */; };
 		73185D202195C352005F1B96 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73185D1F2195C352005F1B96 /* SubViewController.m */; };
+		731FC06D21FD999F00E596E9 /* LXSeparateCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 731FC06C21FD999F00E596E9 /* LXSeparateCache.m */; };
 		733E893A21BEA32100AF035A /* LXCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893921BEA32100AF035A /* LXCache.m */; };
-		733E893D21BEA5F400AF035A /* LXSeparateCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893C21BEA5F400AF035A /* LXSeparateCache.m */; };
-		733E894021BEA82300AF035A /* LXKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E893F21BEA82300AF035A /* LXKVStorage.m */; };
 		733E894321BEA82F00AF035A /* LXMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E894221BEA82F00AF035A /* LXMemoryCache.m */; };
-		733E894621BEA83D00AF035A /* LXDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 733E894521BEA83D00AF035A /* LXDiskCache.m */; };
 		73402E0921BFA9C30090CBC7 /* LXSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 73402E0821BFA9C30090CBC7 /* LXSqlite.m */; };
 		7349A80E218AF03A0073077B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A80D218AF03A0073077B /* AppDelegate.m */; };
 		7349A811218AF03A0073077B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A810218AF03A0073077B /* ViewController.m */; };
@@ -20,24 +25,38 @@
 		7349A816218AF03B0073077B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7349A815218AF03B0073077B /* Assets.xcassets */; };
 		7349A819218AF03B0073077B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7349A817218AF03B0073077B /* LaunchScreen.storyboard */; };
 		7349A81C218AF03B0073077B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7349A81B218AF03B0073077B /* main.m */; };
+		73546C3121E6CF3C007FA573 /* RHCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 73546C2D21E6CF3B007FA573 /* RHCacheManager.m */; };
+		73546C3221E6CF3C007FA573 /* RHCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 73546C3021E6CF3B007FA573 /* RHCache.m */; };
+		7386F1ED21ECD58D005DDE2E /* LXSafeDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7386F1EC21ECD58D005DDE2E /* LXSafeDictionary.m */; };
 		C9F0492D29628A6432BE3212 /* libPods-LXCache.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A75564ECC7F1315892BBE56 /* libPods-LXCache.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		368A265B28A47CAC856412BE /* Pods-LXCache.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXCache.release.xcconfig"; path = "Pods/Target Support Files/Pods-LXCache/Pods-LXCache.release.xcconfig"; sourceTree = "<group>"; };
 		5A75564ECC7F1315892BBE56 /* libPods-LXCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LXCache.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73083EFB21F02859005047C4 /* LXRuntimeExtensiions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXRuntimeExtensiions.h; sourceTree = "<group>"; };
+		73083EFC21F02859005047C4 /* LXRuntimeExtensiions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXRuntimeExtensiions.m; sourceTree = "<group>"; };
+		73083F0121F0B5B2005047C4 /* LXCacheProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXCacheProtocol.h; sourceTree = "<group>"; };
+		73083F0221F0B5B2005047C4 /* LXCacheProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXCacheProtocol.m; sourceTree = "<group>"; };
+		73083F0E21F0C36B005047C4 /* EXTConcreteProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTConcreteProtocol.h; sourceTree = "<group>"; };
+		73083F0F21F0C36B005047C4 /* EXTConcreteProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTConcreteProtocol.m; sourceTree = "<group>"; };
+		73083F1021F0C36B005047C4 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
+		73083F1121F0C36C005047C4 /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; };
+		73083F1221F0C36C005047C4 /* EXTRuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTRuntimeExtensions.m; sourceTree = "<group>"; };
+		73083F1521F0D5E7005047C4 /* NSObject+LXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LXCategory.h"; sourceTree = "<group>"; };
+		73083F1621F0D5E7005047C4 /* NSObject+LXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LXCategory.m"; sourceTree = "<group>"; };
+		73083F1B21F0F7A1005047C4 /* LXProtocolExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXProtocolExtension.h; sourceTree = "<group>"; };
+		73083F1C21F0F7A1005047C4 /* LXProtocolExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXProtocolExtension.m; sourceTree = "<group>"; };
+		73104B5722156BDA002DB597 /* LXDiskCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXDiskCache.h; sourceTree = "<group>"; };
+		73104B5822156BDA002DB597 /* LXDiskCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXDiskCache.m; sourceTree = "<group>"; };
 		73185D1E2195C352005F1B96 /* SubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
 		73185D1F2195C352005F1B96 /* SubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
+		731FC06B21FD999F00E596E9 /* LXSeparateCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSeparateCache.h; sourceTree = "<group>"; };
+		731FC06C21FD999F00E596E9 /* LXSeparateCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXSeparateCache.m; sourceTree = "<group>"; };
 		733E893821BEA32100AF035A /* LXCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXCache.h; sourceTree = "<group>"; };
 		733E893921BEA32100AF035A /* LXCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXCache.m; sourceTree = "<group>"; };
-		733E893B21BEA5F400AF035A /* LXSeparateCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSeparateCache.h; sourceTree = "<group>"; };
-		733E893C21BEA5F400AF035A /* LXSeparateCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXSeparateCache.m; sourceTree = "<group>"; };
-		733E893E21BEA82300AF035A /* LXKVStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXKVStorage.h; sourceTree = "<group>"; };
-		733E893F21BEA82300AF035A /* LXKVStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXKVStorage.m; sourceTree = "<group>"; };
 		733E894121BEA82F00AF035A /* LXMemoryCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXMemoryCache.h; sourceTree = "<group>"; };
 		733E894221BEA82F00AF035A /* LXMemoryCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXMemoryCache.m; sourceTree = "<group>"; };
-		733E894421BEA83D00AF035A /* LXDiskCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXDiskCache.h; sourceTree = "<group>"; };
-		733E894521BEA83D00AF035A /* LXDiskCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXDiskCache.m; sourceTree = "<group>"; };
 		73402E0721BFA9C30090CBC7 /* LXSqlite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSqlite.h; sourceTree = "<group>"; };
 		73402E0821BFA9C30090CBC7 /* LXSqlite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXSqlite.m; sourceTree = "<group>"; };
 		7349A809218AF03A0073077B /* LXCache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXCache.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +69,13 @@
 		7349A818218AF03B0073077B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7349A81A218AF03B0073077B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7349A81B218AF03B0073077B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		73546C2D21E6CF3B007FA573 /* RHCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCacheManager.m; sourceTree = "<group>"; };
+		73546C2E21E6CF3B007FA573 /* RHCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCache.h; sourceTree = "<group>"; };
+		73546C2F21E6CF3B007FA573 /* RHCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCacheManager.h; sourceTree = "<group>"; };
+		73546C3021E6CF3B007FA573 /* RHCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCache.m; sourceTree = "<group>"; };
+		735DDF7721ED683600109787 /* LXCacheDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXCacheDefine.h; sourceTree = "<group>"; };
+		7386F1EB21ECD58D005DDE2E /* LXSafeDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXSafeDictionary.h; sourceTree = "<group>"; };
+		7386F1EC21ECD58D005DDE2E /* LXSafeDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXSafeDictionary.m; sourceTree = "<group>"; };
 		E5DF957B8416256D5159F746 /* Pods-LXCache.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXCache.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXCache/Pods-LXCache.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,16 +104,25 @@
 			children = (
 				733E893821BEA32100AF035A /* LXCache.h */,
 				733E893921BEA32100AF035A /* LXCache.m */,
-				733E893B21BEA5F400AF035A /* LXSeparateCache.h */,
-				733E893C21BEA5F400AF035A /* LXSeparateCache.m */,
-				733E893E21BEA82300AF035A /* LXKVStorage.h */,
-				733E893F21BEA82300AF035A /* LXKVStorage.m */,
+				731FC06B21FD999F00E596E9 /* LXSeparateCache.h */,
+				731FC06C21FD999F00E596E9 /* LXSeparateCache.m */,
 				733E894121BEA82F00AF035A /* LXMemoryCache.h */,
 				733E894221BEA82F00AF035A /* LXMemoryCache.m */,
+				73104B5722156BDA002DB597 /* LXDiskCache.h */,
+				73104B5822156BDA002DB597 /* LXDiskCache.m */,
 				73402E0721BFA9C30090CBC7 /* LXSqlite.h */,
 				73402E0821BFA9C30090CBC7 /* LXSqlite.m */,
-				733E894421BEA83D00AF035A /* LXDiskCache.h */,
-				733E894521BEA83D00AF035A /* LXDiskCache.m */,
+				7386F1EB21ECD58D005DDE2E /* LXSafeDictionary.h */,
+				7386F1EC21ECD58D005DDE2E /* LXSafeDictionary.m */,
+				73083F0121F0B5B2005047C4 /* LXCacheProtocol.h */,
+				73083F0221F0B5B2005047C4 /* LXCacheProtocol.m */,
+				73083F1521F0D5E7005047C4 /* NSObject+LXCategory.h */,
+				73083F1621F0D5E7005047C4 /* NSObject+LXCategory.m */,
+				735DDF7721ED683600109787 /* LXCacheDefine.h */,
+				73083EFB21F02859005047C4 /* LXRuntimeExtensiions.h */,
+				73083EFC21F02859005047C4 /* LXRuntimeExtensiions.m */,
+				73083F1B21F0F7A1005047C4 /* LXProtocolExtension.h */,
+				73083F1C21F0F7A1005047C4 /* LXProtocolExtension.m */,
 			);
 			path = LXCache;
 			sourceTree = "<group>";
@@ -113,9 +148,15 @@
 		7349A80B218AF03A0073077B /* LXCache */ = {
 			isa = PBXGroup;
 			children = (
+				73546C2C21E6CF3B007FA573 /* RHCaches */,
 				733E893721BEA2DC00AF035A /* LXCache */,
 				7349A80C218AF03A0073077B /* AppDelegate.h */,
 				7349A80D218AF03A0073077B /* AppDelegate.m */,
+				73083F0E21F0C36B005047C4 /* EXTConcreteProtocol.h */,
+				73083F0F21F0C36B005047C4 /* EXTConcreteProtocol.m */,
+				73083F1121F0C36C005047C4 /* EXTRuntimeExtensions.h */,
+				73083F1221F0C36C005047C4 /* EXTRuntimeExtensions.m */,
+				73083F1021F0C36B005047C4 /* metamacros.h */,
 				7349A80F218AF03A0073077B /* ViewController.h */,
 				7349A810218AF03A0073077B /* ViewController.m */,
 				73185D1E2195C352005F1B96 /* SubViewController.h */,
@@ -127,6 +168,17 @@
 				7349A81B218AF03B0073077B /* main.m */,
 			);
 			path = LXCache;
+			sourceTree = "<group>";
+		};
+		73546C2C21E6CF3B007FA573 /* RHCaches */ = {
+			isa = PBXGroup;
+			children = (
+				73546C2F21E6CF3B007FA573 /* RHCacheManager.h */,
+				73546C2D21E6CF3B007FA573 /* RHCacheManager.m */,
+				73546C2E21E6CF3B007FA573 /* RHCache.h */,
+				73546C3021E6CF3B007FA573 /* RHCache.m */,
+			);
+			path = RHCaches;
 			sourceTree = "<group>";
 		};
 		DEF9698A1A8E9D2463B68717 /* Pods */ = {
@@ -149,6 +201,8 @@
 				7349A805218AF03A0073077B /* Sources */,
 				7349A806218AF03A0073077B /* Frameworks */,
 				7349A807218AF03A0073077B /* Resources */,
+				AE8C5E9DDC2B7CDD2F27597E /* [CP] Embed Pods Frameworks */,
+				DEA15CDC0F435B3DAA546D27 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,6 +277,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AE8C5E9DDC2B7CDD2F27597E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LXCache/Pods-LXCache-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEA15CDC0F435B3DAA546D27 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LXCache/Pods-LXCache-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -230,15 +314,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73083F1D21F0F7A1005047C4 /* LXProtocolExtension.m in Sources */,
+				73546C3121E6CF3C007FA573 /* RHCacheManager.m in Sources */,
 				733E893A21BEA32100AF035A /* LXCache.m in Sources */,
 				7349A811218AF03A0073077B /* ViewController.m in Sources */,
 				7349A81C218AF03B0073077B /* main.m in Sources */,
+				731FC06D21FD999F00E596E9 /* LXSeparateCache.m in Sources */,
 				733E894321BEA82F00AF035A /* LXMemoryCache.m in Sources */,
+				73083F1421F0C36C005047C4 /* EXTRuntimeExtensions.m in Sources */,
+				73083F1321F0C36C005047C4 /* EXTConcreteProtocol.m in Sources */,
 				7349A80E218AF03A0073077B /* AppDelegate.m in Sources */,
-				733E894021BEA82300AF035A /* LXKVStorage.m in Sources */,
-				733E894621BEA83D00AF035A /* LXDiskCache.m in Sources */,
+				73083F0321F0B5B2005047C4 /* LXCacheProtocol.m in Sources */,
+				7386F1ED21ECD58D005DDE2E /* LXSafeDictionary.m in Sources */,
+				73546C3221E6CF3C007FA573 /* RHCache.m in Sources */,
+				73083F1721F0D5E7005047C4 /* NSObject+LXCategory.m in Sources */,
 				73185D202195C352005F1B96 /* SubViewController.m in Sources */,
-				733E893D21BEA5F400AF035A /* LXSeparateCache.m in Sources */,
+				73104B5922156BDA002DB597 /* LXDiskCache.m in Sources */,
+				73083EFD21F02859005047C4 /* LXRuntimeExtensiions.m in Sources */,
 				73402E0921BFA9C30090CBC7 /* LXSqlite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

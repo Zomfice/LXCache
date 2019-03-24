@@ -3,4 +3,6 @@ platform :ios, '8.0'
 
 target 'LXCache' do
    pod 'YYCache'
+   pod 'FMDB'
+   pod 'WCDB'
 end

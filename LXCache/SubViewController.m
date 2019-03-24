@@ -94,8 +94,10 @@
         label.frame = CGRectMake(0, 0, WIDTH, HeaderHeight / 2);
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
-        label.text = [@"销量" stringByAppendingFormat:@"%ld",section];
+        label.tag = 1;
     }
+    UILabel *label = [view viewWithTag:1];
+    label.text = [@"销量" stringByAppendingFormat:@"%ld",section];
     return view;
 }
 
